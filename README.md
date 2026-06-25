@@ -1,58 +1,98 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Aplikasi Chatbot AI Pertanian (Khusus SMK)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Deskripsi Sistem
+Sebuah platform chatbot edukasi berbasis Artificial Intelligence (AI) yang dikhususkan untuk menjawab, mengedukasi, dan memecahkan masalah di bidang pertanian. Sistem ini diimplementasikan menggunakan arsitektur pemisahan Backend API dan Frontend SPA dengan framework Laravel, React, dan library AI Prism, dirancang khusus untuk ekosistem Sekolah Menengah Kejuruan (SMK).
 
-## About Laravel
+## 1. Daftar Fitur Aplikasi Komprehensif
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### A. Modul Siswa (End-User)
+- **Chat Interface Real-time**: Antarmuka obrolan yang interaktif dengan indikator typing, mirip dengan ChatGPT.
+- **Manajemen Sesi Chat**: Kemampuan membuat obrolan baru (New Chat), menyimpan riwayat obrolan, dan mengganti nama sesi obrolan secara otomatis.
+- **Prompt Starter (Rekomendasi Pertanyaan)**: Tombol cepat untuk pertanyaan umum (misal: "Cara atasi hama wereng", "Pemupukan hidroponik").
+- **Export Chat**: Fitur untuk mengunduh riwayat obrolan menjadi PDF/Teks sebagai catatan belajar.
+- **Feedback System**: Memberikan thumbs up atau thumbs down pada jawaban AI untuk bahan evaluasi guru.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### B. Modul Guru / Validator (Moderator)
+- **Dashboard Analitik**: Melihat metrik penggunaan AI oleh siswa (topik paling banyak dicari, tren penyakit tanaman yang sering ditanyakan).
+- **Knowledge Base Management (Manajemen Basis Pengetahuan)**:
+  - Unggah dokumen (PDF modul sekolah, buku teks pertanian, jurnal).
+  - Input artikel/teks manual.
+  - Sistem akan otomatis memecah dokumen (chunking) dan mengubahnya menjadi vektor untuk referensi AI.
+- **Monitoring Obrolan**: Melihat log pertanyaan siswa dan jawaban AI (untuk memastikan AI tidak berhalusinasi/keluar konteks).
+- **Review Feedback**: Melihat jawaban AI yang diberi thumbs down oleh siswa dan melakukan koreksi pada basis pengetahuan.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### C. Modul Administrator
+- **Manajemen Pengguna (CRUD)**: Mengelola data Admin, Guru, dan Siswa.
+- **Manajemen Hak Akses**: Konfigurasi Role & Permission.
+- **AI System Configuration**: 
+  - Mengatur System Prompt utama (contoh: "Kamu adalah asisten guru pertanian SMK...").
+  - Mengganti kunci API LLM.
+  - Mengatur parameter AI (Temperature, Max Tokens).
 
-## Learning Laravel
+## 2. Proses Bisnis (Business Process)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### A. Alur Ingesti Pengetahuan (Knowledge Ingestion Flow) - Oleh Guru
+1. Guru mengunggah PDF Modul Pertanian ke sistem.
+2. Sistem (Laravel Job/Queue) mengekstraksi teks dari PDF.
+3. Teks dipotong menjadi bagian-bagian kecil (Chunking, misal per 500 kata).
+4. Sistem memanggil OpenAI Embeddings API untuk mengubah teks menjadi angka vektor.
+5. Vektor disimpan ke tabel `document_chunks` di database PostgreSQL (menggunakan pgvector).
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### B. Alur Percakapan RAG (Retrieval-Augmented Generation) - Oleh Siswa
+1. Siswa mengetik pertanyaan: "Bagaimana cara mengatasi busuk akar pada tanaman cabai?"
+2. Sistem mengubah pertanyaan siswa menjadi vektor (Embedding).
+3. Sistem melakukan pencarian kemiripan vektor (Vector Similarity Search) di PostgreSQL untuk mencari 3-5 referensi teks yang paling relevan dari dokumen yang diunggah guru.
+4. Sistem menggunakan Prism untuk merakit prompt:
+   - **System Prompt**: "Jawab hanya berdasarkan referensi berikut..."
+   - **Konteks**: [Teks referensi dari database]
+   - **User Prompt**: "Bagaimana cara mengatasi busuk akar..."
+5. Prism mengirim permintaan ke LLM (OpenAI gpt-4o-mini).
+6. LLM mengembalikan jawaban pertanian yang akurat.
+7. Jawaban ditampilkan ke antarmuka siswa dan disimpan di riwayat log.
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## 3. Struktur Data dan Master Data (Database Schema)
+Sistem menggunakan PostgreSQL dengan tipe data relasional dan vektor.
 
-## Agentic Development
+### A. Master Data
+- `roles` (id, name) -> Data: Admin, Guru, Siswa
+- `permissions` (id, name)
+- `agri_categories` (id, name, description) -> Data: Agribisnis Tanaman Pangan, Hortikultura, Perkebunan, Peternakan.
+- `system_settings` (key, value) -> Data: active_llm_model, system_prompt, api_key.
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+### B. Tabel Pengguna & Akses
+- `users`: id (UUID), name, email, nisn_nip (String, nullable), password, role_id.
 
-```bash
-composer require laravel/boost --dev
+### C. Tabel Transaksional Chatbot
+- `chat_sessions`: id (UUID), user_id (FK), title (String), created_at, updated_at.
+- `messages`: id (UUID), chat_session_id (FK), role (Enum: 'user', 'assistant', 'system'), content (Text), tokens_used (Integer), created_at.
+- `message_feedbacks`: id (UUID), message_id (FK), rating (Enum: 'up', 'down'), student_note (Text), created_at.
 
-php artisan boost:install
-```
+### D. Tabel Basis Pengetahuan (Knowledge Base / RAG)
+- `documents`: id (UUID), title (String), agri_category_id (FK), file_path (String), uploaded_by (FK: user_id), status (Enum: 'processing', 'completed', 'failed').
+- `document_chunks`: id (UUID), document_id (FK), content (Text), embedding (VECTOR(1536)) -> Tipe data khusus pgvector.
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+## 4. Daftar Teknologi (Tech Stack)
+Arsitektur ini dirancang agar kuat, efisien biaya, dan mudah dirawat.
 
-## Contributing
+### A. Backend & Core AI
+- **Framework**: Laravel 11 (PHP 8.2+)
+- **AI Integration**: Prism (oleh EchoLabs) untuk orkestrasi LLM (membangun sistem prompt, chat memory, dan parsing response).
+- **LLM Provider**: OpenAI API (Model: gpt-4o-mini untuk teks/chat, text-embedding-3-small untuk pembuatan vektor).
+- **Authentication**: JWT (`php-open-source-saver/jwt-auth`).
+- **Role Management**: Spatie Laravel Permission.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### B. Database & Search
+- **Main Database**: PostgreSQL 15+
+- **Vector Engine**: pgvector (Ekstensi PostgreSQL) untuk menyimpan vektor.
+- **ORM**: Laravel Eloquent (dipadukan dengan `halilcosdu/laravel-pgvector`).
 
-## Code of Conduct
+### C. Frontend (Antarmuka Pengguna)
+- **Pendekatan**: REST API Terpisah.
+- **Framework**: ReactJS (TypeScript) via Vite.
+- **Styling**: Tailwind CSS + Shadcn UI.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### D. Server & Infrastruktur
+- **OS Server**: Ubuntu Linux 22.04 / 24.04 LTS (VPS).
+- **Web Server**: Nginx.
+- **Queue Worker**: Laravel Horizon (berjalan dengan Redis) sangat penting untuk memproses unggahan PDF (chunking dan embedding) di latar belakang.
+- **Cache & Session**: Redis.
