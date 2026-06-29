@@ -87,7 +87,7 @@ Arsitektur ini dirancang agar kuat, efisien biaya, dan mudah dirawat.
 - **ORM**: Laravel Eloquent (dipadukan dengan `halilcosdu/laravel-pgvector`).
 
 ### C. Frontend (Antarmuka Pengguna)
-- **Pendekatan**: REST API Terpisah.
+- **Pendekatan**: REST API, dikembangkan dalam folder `resources/` Laravel.
 - **Framework**: ReactJS (TypeScript) via Vite.
 - **Styling**: Tailwind CSS + Shadcn UI.
 

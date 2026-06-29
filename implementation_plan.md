@@ -1,25 +1,25 @@
 # Rencana Implementasi & Daftar Kerja: AI Chatbot Pertanian SMK
 
 ## Fase 1: Setup & Inisialisasi Proyek
-- [ ] Instalasi Laravel 11.
-- [ ] Konfigurasi Database PostgreSQL.
-- [ ] Instalasi Ekstensi `pgvector` di PostgreSQL.
-- [ ] Instalasi package pendukung:
-  - `halilcosdu/laravel-pgvector`
-  - Laravel Horizon & Redis
-  - `php-open-source-saver/jwt-auth` (untuk API Auth JWT)
-  - `spatie/laravel-permission` (untuk Manajemen Role & User)
-- [ ] Instalasi EchoLabs Prism untuk orkestrasi LLM.
-- [ ] Setup Frontend Terpisah (React + Vite, Tailwind CSS, Shadcn UI).
+- [x] Instalasi Laravel 11.
+- [x] Konfigurasi Database MySQL.
+- [x] Instalasi package pendukung:
+  - [x] `halilcosdu/laravel-pgvector`
+  - [x] Laravel Horizon & Redis
+  - [x] `php-open-source-saver/jwt-auth` (untuk API Auth JWT)
+  - [x] `spatie/laravel-permission` (untuk Manajemen Role & User)
+- [x] Setup Pinecone API Keys untuk Vector Store.
+- [x] Instalasi EchoLabs Prism untuk orkestrasi LLM.
+- [x] Setup Frontend (React + Vite, Tailwind CSS, Shadcn UI) di dalam folder `resources/`.
 
 ## Fase 2: Struktur Database & Model
-- [ ] Publish Migration Spatie (Role & Permission).
-- [ ] Buat Migration Master Data (`agri_categories`, `system_settings`).
-- [ ] Buat Migration Users.
-- [ ] Buat Migration Chat (`chat_sessions`, `messages`, `message_feedbacks`).
-- [ ] Buat Migration Knowledge Base (`documents`, `document_chunks`).
-- [ ] Buat Model Eloquent dan relasi.
-- [ ] Buat Seeder Master Data.
+- [x] Publish Migration Spatie (Role & Permission).
+- [x] Buat Migration Master Data (`agri_categories`, `system_settings`).
+- [x] Buat Migration Users.
+- [x] Buat Migration Chat (`chat_sessions`, `messages`, `message_feedbacks`).
+- [x] Buat Migration Knowledge Base (`documents`, `document_chunks`).
+- [x] Buat Model Eloquent dan relasi.
+- [x] Buat Seeder Master Data.
 
 ## Fase 3: Integrasi Core AI & RAG
 - [ ] Konfigurasi OpenAI API Key.
@@ -27,7 +27,7 @@
 - [ ] Buat Job Text Chunking.
 - [ ] Buat Service Generate Embeddings (`text-embedding-3-small`).
 - [ ] Integrasi Prism untuk prompt builder & LLM call (`gpt-4o-mini`).
-- [ ] Implementasi Vector Similarity Search dengan `pgvector`.
+- [ ] Implementasi Vector Similarity Search dengan Pinecone (via EchoLabs Prism).
 
 ## Fase 4: Modul Backend (API & Controller)
 - [ ] **Modul Admin:** CRUD User, Setting AI Prompt & Parameter.
@@ -43,4 +43,4 @@
 ## Fase 6: Optimasi & Deployment
 - [ ] Konfigurasi Laravel Horizon (Queue Worker).
 - [ ] Test RAG Accuracy & Prompt Injection.
-- [ ] Setup VPS Ubuntu Linux (Nginx, Supervisor, PostgreSQL).
+- [ ] Setup VPS Ubuntu Linux (Nginx, Supervisor, MySQL).
