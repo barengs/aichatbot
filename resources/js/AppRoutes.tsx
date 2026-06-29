@@ -5,20 +5,40 @@ import ChatPage from './pages/ChatPage';
 import KnowledgeBasePage from './pages/admin/KnowledgeBasePage';
 import AnalyticsPage from './pages/admin/AnalyticsPage';
 import UserManagementPage from './pages/admin/UserManagementPage';
+import LoginPage from './pages/auth/LoginPage';
+import RegisterPage from './pages/auth/RegisterPage';
+import AuthCallback from './pages/auth/AuthCallback';
+import ProtectedRoute from './components/ProtectedRoute';
+import ChatHistoryPage from './pages/user/ChatHistoryPage';
+import ProfilePage from './pages/user/ProfilePage';
 
 export default function AppRoutes() {
     return (
         <Routes>
             <Route path="/" element={<Navigate to="/chat" replace />} />
+            
+            {/* Public Routes */}
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/auth/callback" element={<AuthCallback />} />
 
             <Route element={<DashboardLayout />}>
-                {/* User Routes (General) */}
+                {/* Public General Routes */}
                 <Route path="/chat" element={<ChatPage />} />
 
-                {/* Admin Routes */}
-                <Route path="/knowledge-base" element={<KnowledgeBasePage />} />
-                <Route path="/analytics" element={<AnalyticsPage />} />
-                <Route path="/users" element={<UserManagementPage />} />
+                {/* Protected Routes */}
+                <Route element={<ProtectedRoute />}>
+                    {/* Protected User Routes */}
+                    <Route path="/history" element={<ChatHistoryPage />} />
+                    <Route path="/profile" element={<ProfilePage />} />
+
+                    {/* Admin Routes */}
+                    <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
+                        <Route path="/knowledge-base" element={<KnowledgeBasePage />} />
+                        <Route path="/analytics" element={<AnalyticsPage />} />
+                        <Route path="/users" element={<UserManagementPage />} />
+                    </Route>
+                </Route>
             </Route>
         </Routes>
     );

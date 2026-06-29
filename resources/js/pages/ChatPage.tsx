@@ -1,9 +1,17 @@
-import React, { useState } from 'react';
-import { Paperclip, Send, Leaf, Bug, Droplets, Calendar, BarChart, Download } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import { Paperclip, Send, Leaf, Bug, Droplets, Calendar, BarChart, Download, X, File as FileIcon } from 'lucide-react';
 
 export default function ChatPage() {
     const [input, setInput] = useState('');
-    
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
+    const fileInputRef = useRef<HTMLInputElement>(null);
+
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files.length > 0) {
+            setSelectedFile(e.target.files[0]);
+        }
+    };
+
     return (
         <div className="flex flex-col h-full bg-[#F8FAFC]">
             {/* Main Chat Area */}
@@ -11,7 +19,7 @@ export default function ChatPage() {
                 <div className="w-16 h-16 bg-[#D1F4E0] text-[#0F3B2C] rounded-2xl flex items-center justify-center mb-6">
                     <Leaf size={32} />
                 </div>
-                <h1 className="text-3xl font-bold text-[#0F3B2C] mb-2">Selamat Datang di AgriSmart SMK</h1>
+                <h1 className="text-3xl font-bold text-[#0F3B2C] mb-2">Selamat Datang di Tanya AI</h1>
                 <p className="text-gray-500 mb-12 text-center max-w-lg">
                     Tanya asisten AI untuk solusi pertanian presisi, hama tanaman, hingga strategi budidaya modern sesuai kurikulum SMK.
                 </p>
@@ -47,25 +55,43 @@ export default function ChatPage() {
             {/* Input Area */}
             <div className="p-6 bg-[#F8FAFC]">
                 <div className="max-w-3xl mx-auto relative">
-                    {/* Mock Chat Message */}
-                    <div className="mb-6 flex justify-end">
-                        <div className="bg-[#0F3B2C] text-white p-4 rounded-xl rounded-br-sm max-w-lg shadow-sm">
-                            Bagaimana cara mencegah pembusukan akar pada tanaman tomat di musim hujan?
+
+
+
+
+                    {selectedFile && (
+                        <div className="mb-3 bg-white border border-gray-200 rounded-xl p-2 flex items-center gap-3 shadow-sm w-fit">
+                            <div className="bg-[#D1F4E0] text-[#0F3B2C] p-2 rounded-lg">
+                                <FileIcon size={16} />
+                            </div>
+                            <div className="flex flex-col pr-4">
+                                <span className="text-sm font-medium text-gray-800 truncate max-w-[200px]">{selectedFile.name}</span>
+                                <span className="text-xs text-gray-500">{(selectedFile.size / 1024).toFixed(1)} KB</span>
+                            </div>
+                            <button
+                                onClick={() => setSelectedFile(null)}
+                                className="text-gray-400 hover:text-red-500 transition-colors p-1"
+                            >
+                                <X size={16} />
+                            </button>
                         </div>
-                    </div>
-                    
-                    <div className="absolute -top-12 right-0">
-                        <button className="bg-white border border-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm font-medium flex items-center gap-2 shadow-sm hover:bg-gray-50">
-                            <Download size={16} /> Export Chat (PDF)
-                        </button>
-                    </div>
+                    )}
 
                     <div className="bg-white border border-gray-200 rounded-2xl p-2 flex items-center shadow-sm">
-                        <button className="p-3 text-gray-400 hover:text-gray-600 transition-colors">
+                        <input
+                            type="file"
+                            className="hidden"
+                            ref={fileInputRef}
+                            onChange={handleFileChange}
+                        />
+                        <button
+                            className="p-3 text-gray-400 hover:text-[#0F3B2C] transition-colors"
+                            onClick={() => fileInputRef.current?.click()}
+                        >
                             <Paperclip size={20} />
                         </button>
-                        <input 
-                            type="text" 
+                        <input
+                            type="text"
                             className="flex-1 bg-transparent border-none outline-none px-2 text-gray-700 placeholder-gray-400"
                             placeholder="Tanya tentang budidaya atau kurikulum SMK..."
                             value={input}
