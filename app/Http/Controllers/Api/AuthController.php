@@ -20,7 +20,11 @@ class AuthController extends Controller
 
     public function me()
     {
-        return response()->json(auth('api')->user());
+        $user = auth('api')->user();
+        if ($user) {
+            $user->load('roles');
+        }
+        return response()->json($user);
     }
 
     public function logout()

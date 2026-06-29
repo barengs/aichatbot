@@ -35,10 +35,10 @@
 - [x] **Modul Siswa:** Init Session, Kirim Pesan, Simpan Log, Feedback, Export Chat.
 
 ## Fase 5: Modul Frontend (React + Vite REST API)
-- [ ] Setup Layout & API Auth Integration.
-- [ ] **UI Siswa:** Chat Interface real-time, Sidebar Riwayat, Prompt Starter.
-- [ ] **UI Guru:** Upload Dokumen, Dashboard Analitik, Log Chat.
-- [ ] **UI Admin:** Manajemen Pengguna, Konfigurasi AI.
+- [x] Setup Layout & API Auth Integration.
+- [x] **UI Siswa:** Chat Interface real-time, Sidebar Riwayat, Prompt Starter.
+- [x] **UI Guru:** Upload Dokumen, Dashboard Analitik, Log Chat.
+- [x] **UI Admin:** Manajemen Pengguna, Konfigurasi AI.
 
 ## Fase 6: Optimasi & Deployment
 - [ ] Konfigurasi Laravel Horizon (Queue Worker).
