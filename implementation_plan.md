@@ -44,3 +44,8 @@
 - [ ] Konfigurasi Laravel Horizon (Queue Worker).
 - [ ] Test RAG Accuracy & Prompt Injection.
 - [ ] Setup VPS Ubuntu Linux (Nginx, Supervisor, MySQL).
+
+## Laporan Unit Test (Fase 4)
+- **AuthTest:** Pengujian endpoint `/api/login` (Berhasil merespon `200` dan mengembalikan `access_token`).
+- **RoleAccessTest:** Pengujian middleware role Spatie pada endpoint `/api/admin/settings` (Berhasil memberikan akses `200` jika user memiliki role `admin`).
+- **Status:** Lulus (Passed: 2, Assertions: 3).
