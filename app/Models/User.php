@@ -20,6 +20,11 @@ class User extends Authenticatable implements JWTSubject
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable, HasRoles;
 
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
+
     protected function casts(): array
     {
         return [

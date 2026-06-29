@@ -2,7 +2,6 @@ import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import DashboardLayout from './layouts/DashboardLayout';
 import ChatPage from './pages/ChatPage';
-import KnowledgeBasePage from './pages/admin/KnowledgeBasePage';
 import AnalyticsPage from './pages/admin/AnalyticsPage';
 import UserManagementPage from './pages/admin/UserManagementPage';
 import LoginPage from './pages/auth/LoginPage';
@@ -38,7 +37,6 @@ export default function AppRoutes() {
 
                     {/* Admin Routes */}
                     <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
-                        <Route path="/knowledge-base" element={<KnowledgeBasePage />} />
                         <Route path="/analytics" element={<AnalyticsPage />} />
                         <Route path="/users" element={<UserManagementPage />} />
                     </Route>

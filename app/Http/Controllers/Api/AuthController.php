@@ -26,7 +26,7 @@ class AuthController extends Controller
     {
         $user = auth('api')->user();
         if ($user) {
-            $user->load('roles');
+            $user->load(['roles', 'profile']);
         }
         return response()->json($user);
     }
@@ -59,6 +59,8 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+        
+        $user->profile()->create(['activity' => 'Siswa']);
         
         $user->assignRole('siswa');
 
@@ -93,6 +95,7 @@ class AuthController extends Controller
                     'avatar' => $googleUser->getAvatar(),
                     'password' => Hash::make(Str::random(24)),
                 ]);
+                $user->profile()->create(['activity' => 'Siswa']);
                 $user->assignRole('siswa');
             }
 

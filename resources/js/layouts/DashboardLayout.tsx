@@ -86,14 +86,6 @@ export default function DashboardLayout() {
                                 {!isCollapsed && <span>Dashboard</span>}
                             </NavLink>
                             <NavLink
-                                to="/knowledge-base"
-                                className={({ isActive }) => `flex items-center ${isCollapsed ? 'justify-center' : 'gap-3'} px-3 py-2 rounded-md text-sm font-medium ${isActive ? 'bg-[#D1F4E0] text-[#0F3B2C]' : 'text-gray-600 hover:bg-gray-100'}`}
-                                title="Knowledge Base"
-                            >
-                                <Database size={18} />
-                                {!isCollapsed && <span>Knowledge Base</span>}
-                            </NavLink>
-                            <NavLink
                                 to="/users"
                                 className={({ isActive }) => `flex items-center ${isCollapsed ? 'justify-center' : 'gap-3'} px-3 py-2 rounded-md text-sm font-medium ${isActive ? 'bg-[#D1F4E0] text-[#0F3B2C]' : 'text-gray-600 hover:bg-gray-100'}`}
                                 title="User Management"

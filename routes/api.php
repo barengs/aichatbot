@@ -4,8 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\AdminController;
-use App\Http\Controllers\Api\GuruController;
-use App\Http\Controllers\Api\SiswaController;
+use App\Http\Controllers\Api\ChatController;
 
 // Auth Routes
 Route::post('/register', [AuthController::class, 'register']);
@@ -18,6 +17,7 @@ Route::get('/auth/google/callback', [AuthController::class, 'handleGoogleCallbac
 Route::middleware('auth:api')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/me', [AuthController::class, 'me']);
+    Route::put('/profile', [\App\Http\Controllers\Api\ProfileController::class, 'update']);
 
     // Admin Routes
     Route::middleware('role:admin')->prefix('admin')->group(function () {
@@ -26,17 +26,11 @@ Route::middleware('auth:api')->group(function () {
         Route::post('settings', [AdminController::class, 'updateSettings']);
     });
 
-    // Guru Routes
-    Route::middleware('role:guru')->prefix('guru')->group(function () {
-        Route::post('documents/upload', [GuruController::class, 'uploadDocument']);
-        Route::get('documents', [GuruController::class, 'listDocuments']);
-        Route::get('analytics', [GuruController::class, 'getAnalytics']);
-    });
-
-    // Siswa Routes
-    Route::middleware('role:siswa')->prefix('siswa')->group(function () {
-        Route::post('chat/session', [SiswaController::class, 'initSession']);
-        Route::post('chat/message', [SiswaController::class, 'sendMessage']);
-        Route::post('chat/feedback', [SiswaController::class, 'submitFeedback']);
+    // User Routes (Guru & Siswa - role dan permission diatur dinamis)
+    Route::prefix('user')->group(function () {
+        // Fitur Chat & Context Upload (File attachment pada chat)
+        Route::post('chat/session', [\App\Http\Controllers\Api\ChatController::class, 'initSession']);
+        Route::post('chat/message', [\App\Http\Controllers\Api\ChatController::class, 'sendMessage']);
+        Route::post('chat/feedback', [\App\Http\Controllers\Api\ChatController::class, 'submitFeedback']);
     });
 });
