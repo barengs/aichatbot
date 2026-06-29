@@ -7,6 +7,8 @@ import AnalyticsPage from './pages/admin/AnalyticsPage';
 import UserManagementPage from './pages/admin/UserManagementPage';
 import LoginPage from './pages/auth/LoginPage';
 import RegisterPage from './pages/auth/RegisterPage';
+import ForgotPasswordPage from './pages/auth/ForgotPasswordPage';
+import ResetPasswordPage from './pages/auth/ResetPasswordPage';
 import AuthCallback from './pages/auth/AuthCallback';
 import ProtectedRoute from './components/ProtectedRoute';
 import ChatHistoryPage from './pages/user/ChatHistoryPage';
@@ -20,6 +22,8 @@ export default function AppRoutes() {
             {/* Public Routes */}
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
+            <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+            <Route path="/password-reset/:token" element={<ResetPasswordPage />} />
             <Route path="/auth/callback" element={<AuthCallback />} />
 
             <Route element={<DashboardLayout />}>

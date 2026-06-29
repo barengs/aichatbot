@@ -9,7 +9,7 @@ export default function LoginPage() {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-    
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -22,18 +22,18 @@ export default function LoginPage() {
             // 1. Get Token
             const loginRes = await api.post('/login', { email, password });
             const token = loginRes.data.access_token;
-            
+
             // Temporary set token in axios headers manually to fetch /me immediately
             // Since Redux might not update fast enough for the very next line
             const meRes = await api.get('/me', {
                 headers: { Authorization: `Bearer ${token}` }
             });
-            
+
             const user = meRes.data;
 
             // 2. Dispatch to Redux
             dispatch(setCredentials({ user, token }));
-            
+
             // 3. Redirect
             navigate('/chat');
         } catch (err: any) {
@@ -48,10 +48,10 @@ export default function LoginPage() {
             <div className="w-full max-w-md p-8 bg-white rounded-xl shadow-sm border border-gray-100">
                 <div className="flex flex-col items-center mb-8">
                     <div className="w-12 h-12 bg-[#0F3B2C] rounded-md flex items-center justify-center text-white mb-4">
-                        <span className="text-xl font-bold">TC</span>
+                        <span className="text-xl font-bold">TA</span>
                     </div>
-                    <h2 className="text-2xl font-bold text-gray-900">TaniCerdas</h2>
-                    <p className="text-sm text-gray-500 mt-1">Log in to your account</p>
+                    <h2 className="text-2xl font-bold text-gray-900">Tanya AI</h2>
+                    <p className="text-sm text-gray-500 mt-1">Masuk dengan akun anda</p>
                 </div>
 
                 {error && (
@@ -63,8 +63,8 @@ export default function LoginPage() {
                 <form onSubmit={handleLogin} className="space-y-4">
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                        <input 
-                            type="email" 
+                        <input
+                            type="email"
                             required
                             value={email}
                             onChange={e => setEmail(e.target.value)}
@@ -72,11 +72,16 @@ export default function LoginPage() {
                             placeholder="admin@smk.id"
                         />
                     </div>
-                    
+
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
-                        <input 
-                            type="password" 
+                        <div className="flex items-center justify-between mb-1">
+                            <label className="block text-sm font-medium text-gray-700">Password</label>
+                            <Link to="/forgot-password" className="text-xs font-semibold text-[#0F3B2C] hover:underline">
+                                Lupa password?
+                            </Link>
+                        </div>
+                        <input
+                            type="password"
                             required
                             value={password}
                             onChange={e => setPassword(e.target.value)}
@@ -85,8 +90,8 @@ export default function LoginPage() {
                         />
                     </div>
 
-                    <button 
-                        type="submit" 
+                    <button
+                        type="submit"
                         disabled={loading}
                         className="w-full bg-[#0F3B2C] text-white py-2 rounded-md hover:bg-[#0c2f23] transition-colors disabled:opacity-50"
                     >
@@ -96,11 +101,11 @@ export default function LoginPage() {
 
                 <div className="relative flex items-center justify-center mb-6">
                     <div className="absolute border-t border-gray-200 w-full"></div>
-                    <span className="bg-white px-3 text-sm text-gray-500 relative">Or continue with</span>
+                    <span className="bg-white px-3 text-sm text-gray-500 relative">Atau masuk dengan</span>
                 </div>
-                
-                <button 
-                    type="button" 
+
+                <button
+                    type="button"
                     onClick={async () => {
                         try {
                             const res = await api.get('/auth/google/redirect');
@@ -120,9 +125,9 @@ export default function LoginPage() {
                     </svg>
                     Google
                 </button>
-                
+
                 <p className="mt-8 text-center text-sm text-gray-600">
-                    Don't have an account? <Link to="/register" className="text-[#0F3B2C] font-semibold hover:underline">Register</Link>
+                    Belum punya akun? <Link to="/register" className="text-[#0F3B2C] font-semibold hover:underline">Daftar</Link>
                 </p>
             </div>
         </div>

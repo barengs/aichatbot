@@ -10,7 +10,7 @@ export default function RegisterPage() {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
-    
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -22,11 +22,11 @@ export default function RegisterPage() {
         try {
             const res = await api.post('/register', { name, email, password });
             const token = res.data.access_token;
-            
+
             const meRes = await api.get('/me', {
                 headers: { Authorization: `Bearer ${token}` }
             });
-            
+
             const user = meRes.data;
 
             dispatch(setCredentials({ user, token }));
@@ -55,7 +55,7 @@ export default function RegisterPage() {
                         <span className="text-xl font-bold">TA</span>
                     </div>
                     <h2 className="text-2xl font-bold text-gray-900">Tanya AI</h2>
-                    <p className="text-sm text-gray-500 mt-1">Create your account</p>
+                    <p className="text-sm text-gray-500 mt-1">Buat akun anda</p>
                 </div>
 
                 {error && (
@@ -67,8 +67,8 @@ export default function RegisterPage() {
                 <form onSubmit={handleRegister} className="space-y-4 mb-6">
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
-                        <input 
-                            type="text" 
+                        <input
+                            type="text"
                             required
                             value={name}
                             onChange={e => setName(e.target.value)}
@@ -79,8 +79,8 @@ export default function RegisterPage() {
 
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                        <input 
-                            type="email" 
+                        <input
+                            type="email"
                             required
                             value={email}
                             onChange={e => setEmail(e.target.value)}
@@ -88,11 +88,11 @@ export default function RegisterPage() {
                             placeholder="user@example.com"
                         />
                     </div>
-                    
+
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
-                        <input 
-                            type="password" 
+                        <input
+                            type="password"
                             required
                             minLength={8}
                             value={password}
@@ -102,22 +102,22 @@ export default function RegisterPage() {
                         />
                     </div>
 
-                    <button 
-                        type="submit" 
+                    <button
+                        type="submit"
                         disabled={loading}
                         className="w-full bg-[#0F3B2C] text-white py-2 rounded-md hover:bg-[#0c2f23] transition-colors disabled:opacity-50"
                     >
                         {loading ? 'Registering...' : 'Register'}
                     </button>
                 </form>
-                
+
                 <div className="relative flex items-center justify-center mb-6">
                     <div className="absolute border-t border-gray-200 w-full"></div>
-                    <span className="bg-white px-3 text-sm text-gray-500 relative">Or continue with</span>
+                    <span className="bg-white px-3 text-sm text-gray-500 relative">Atau masuk dengan</span>
                 </div>
-                
-                <button 
-                    type="button" 
+
+                <button
+                    type="button"
                     onClick={handleGoogleLogin}
                     className="w-full flex items-center justify-center gap-2 bg-white border border-gray-300 text-gray-700 py-2 rounded-md hover:bg-gray-50 transition-colors font-medium"
                 >
@@ -130,9 +130,9 @@ export default function RegisterPage() {
                     </svg>
                     Google
                 </button>
-                
+
                 <p className="mt-8 text-center text-sm text-gray-600">
-                    Already have an account? <Link to="/login" className="text-[#0F3B2C] font-semibold hover:underline">Sign In</Link>
+                    Sudah punya akun? <Link to="/login" className="text-[#0F3B2C] font-semibold hover:underline">Masuk</Link>
                 </p>
             </div>
         </div>

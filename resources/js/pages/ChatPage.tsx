@@ -102,7 +102,7 @@ export default function ChatPage() {
                         </button>
                     </div>
                     <p className="text-center text-xs text-gray-400 mt-3">
-                        AgriSmart AI dapat membuat kesalahan. Periksa informasi penting.
+                        Tanya AI dapat membuat kesalahan. Periksa informasi penting.
                     </p>
                 </div>
             </div>

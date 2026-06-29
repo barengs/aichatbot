@@ -78,7 +78,7 @@ Arsitektur ini dirancang agar kuat, efisien biaya, dan mudah dirawat.
 - **Framework**: Laravel 11 (PHP 8.2+)
 - **AI Integration**: Prism (oleh EchoLabs) untuk orkestrasi LLM (membangun sistem prompt, chat memory, dan parsing response).
 - **LLM Provider**: OpenAI API (Model: gpt-4o-mini untuk teks/chat, text-embedding-3-small untuk pembuatan vektor).
-- **Authentication**: JWT (`php-open-source-saver/jwt-auth`).
+- **Authentication**: JWT (`php-open-source-saver/jwt-auth`), Laravel Socialite (Google OAuth).
 - **Role Management**: Spatie Laravel Permission.
 
 ### B. Database & Search
@@ -89,7 +89,8 @@ Arsitektur ini dirancang agar kuat, efisien biaya, dan mudah dirawat.
 ### C. Frontend (Antarmuka Pengguna)
 - **Pendekatan**: REST API, dikembangkan dalam folder `resources/` Laravel.
 - **Framework**: ReactJS (TypeScript) via Vite.
-- **Styling**: Tailwind CSS + Shadcn UI.
+- **State Management**: Redux Toolkit (RTK).
+- **Styling & UI**: Tailwind CSS, Shadcn UI, Lucide React (Ikon).
 
 ### D. Server & Infrastruktur
 - **OS Server**: Ubuntu Linux 22.04 / 24.04 LTS (VPS).
