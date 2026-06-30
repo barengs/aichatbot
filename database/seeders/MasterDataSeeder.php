@@ -6,7 +6,6 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use App\Models\User;
-use App\Models\AgriCategory;
 use Illuminate\Support\Facades\Hash;
 
 class MasterDataSeeder extends Seeder
@@ -26,8 +25,5 @@ class MasterDataSeeder extends Seeder
         );
         $admin->assignRole($adminRole);
 
-        AgriCategory::firstOrCreate(['name' => 'Tanaman Pangan'], ['description' => 'Padi, Jagung, Kedelai']);
-        AgriCategory::firstOrCreate(['name' => 'Hortikultura'], ['description' => 'Sayuran, Buah-buahan, Tanaman Hias']);
-        AgriCategory::firstOrCreate(['name' => 'Perkebunan'], ['description' => 'Kelapa Sawit, Karet, Kopi']);
     }
 }
