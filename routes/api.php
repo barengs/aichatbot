@@ -21,6 +21,7 @@ Route::middleware('auth:api')->group(function () {
 
     // Admin Routes
     Route::middleware('role:admin')->prefix('admin')->group(function () {
+        Route::get('analytics', [AdminController::class, 'getAnalytics']);
         Route::apiResource('users', AdminController::class);
         Route::get('settings', [AdminController::class, 'getSettings']);
         Route::post('settings', [AdminController::class, 'updateSettings']);
@@ -32,5 +33,7 @@ Route::middleware('auth:api')->group(function () {
         Route::post('chat/session', [\App\Http\Controllers\Api\ChatController::class, 'initSession']);
         Route::post('chat/message', [\App\Http\Controllers\Api\ChatController::class, 'sendMessage']);
         Route::post('chat/feedback', [\App\Http\Controllers\Api\ChatController::class, 'submitFeedback']);
+        Route::get('chat/sessions', [\App\Http\Controllers\Api\ChatController::class, 'getSessions']);
+        Route::get('chat/sessions/{id}', [\App\Http\Controllers\Api\ChatController::class, 'getSessionMessages']);
     });
 });

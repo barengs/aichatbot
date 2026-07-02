@@ -4,6 +4,7 @@ import DashboardLayout from './layouts/DashboardLayout';
 import ChatPage from './pages/ChatPage';
 import AnalyticsPage from './pages/admin/AnalyticsPage';
 import UserManagementPage from './pages/admin/UserManagementPage';
+import AISettingsPage from './pages/admin/AISettingsPage';
 import LoginPage from './pages/auth/LoginPage';
 import RegisterPage from './pages/auth/RegisterPage';
 import ForgotPasswordPage from './pages/auth/ForgotPasswordPage';
@@ -39,6 +40,7 @@ export default function AppRoutes() {
                     <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
                         <Route path="/analytics" element={<AnalyticsPage />} />
                         <Route path="/users" element={<UserManagementPage />} />
+                        <Route path="/ai-settings" element={<AISettingsPage />} />
                     </Route>
                 </Route>
             </Route>

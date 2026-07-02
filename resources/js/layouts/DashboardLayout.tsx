@@ -93,6 +93,14 @@ export default function DashboardLayout() {
                                 <Users size={18} />
                                 {!isCollapsed && <span>User Management</span>}
                             </NavLink>
+                            <NavLink
+                                to="/ai-settings"
+                                className={({ isActive }) => `flex items-center ${isCollapsed ? 'justify-center' : 'gap-3'} px-3 py-2 rounded-md text-sm font-medium ${isActive ? 'bg-[#D1F4E0] text-[#0F3B2C]' : 'text-gray-600 hover:bg-gray-100'}`}
+                                title="AI Settings"
+                            >
+                                <Database size={18} />
+                                {!isCollapsed && <span>AI Settings</span>}
+                            </NavLink>
                         </>
                     )}
                 </nav>
