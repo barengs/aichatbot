@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { Paperclip, Send, Leaf, Bug, Droplets, Calendar, BarChart, Download, X, File as FileIcon, Loader2, ThumbsUp, ThumbsDown, MessageSquarePlus } from 'lucide-react';
 import { Button } from '../components/ui/button';
+import ReactMarkdown from 'react-markdown';
 import api from '../lib/axios';
 
 interface Message {
@@ -208,7 +209,9 @@ export default function ChatPage() {
                         {messages.map((msg) => (
                             <div key={msg.id} className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
                                 <div className={`max-w-[85%] p-4 rounded-2xl ${msg.role === 'user' ? 'bg-[#0F3B2C] text-white rounded-tr-sm' : 'bg-white border border-gray-200 text-gray-800 rounded-tl-sm shadow-sm'}`}>
-                                    <p className="whitespace-pre-wrap leading-relaxed text-[15px]">{msg.content}</p>
+                                    <div className="prose prose-sm max-w-none prose-p:leading-relaxed prose-img:rounded-xl prose-img:shadow-md">
+                                        <ReactMarkdown>{msg.content}</ReactMarkdown>
+                                    </div>
                                 </div>
                                 {msg.role === 'assistant' && msg.id.length < 13 && ( // Simple check if it's a real DB ID, not Date.now()
                                     <div className="flex gap-2 mt-2 ml-2">
