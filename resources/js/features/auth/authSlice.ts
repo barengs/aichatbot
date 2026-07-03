@@ -4,13 +4,16 @@ export interface User {
     id: number;
     name: string;
     email: string;
+    avatar?: string;
     roles?: { name: string }[];
     permissions?: { name: string }[];
+    all_permissions?: string[];
     profile?: {
         activity?: string;
         bio?: string;
         phone?: string;
         address?: string;
+        institution?: string;
     };
 }
 

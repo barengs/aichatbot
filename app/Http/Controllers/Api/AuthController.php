@@ -26,7 +26,8 @@ class AuthController extends Controller
     {
         $user = auth('api')->user();
         if ($user) {
-            $user->load(['roles', 'profile']);
+            $user->load(['roles.permissions', 'profile']);
+            $user->all_permissions = $user->getAllPermissions()->pluck('name');
         }
         return response()->json($user);
     }
@@ -61,8 +62,6 @@ class AuthController extends Controller
         ]);
         
         $user->profile()->create(['activity' => 'Siswa']);
-        
-        $user->assignRole('siswa');
 
         $token = auth('api')->login($user);
         return $this->respondWithToken($token);
@@ -96,7 +95,6 @@ class AuthController extends Controller
                     'password' => Hash::make(Str::random(24)),
                 ]);
                 $user->profile()->create(['activity' => 'Siswa']);
-                $user->assignRole('siswa');
             }
 
             $token = auth('api')->login($user);

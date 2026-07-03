@@ -92,7 +92,8 @@ class ChatController extends Controller
             
             $replyText = $response->text;
         } catch (\Exception $e) {
-            $replyText = "Maaf, terjadi kesalahan saat menghubungi AI: " . $e->getMessage();
+            \Illuminate\Support\Facades\Log::error("Prism API Error: " . $e->getMessage());
+            $replyText = "Maaf, sistem AI sedang sibuk atau mengalami gangguan koneksi. Silakan coba beberapa saat lagi.";
         }
 
         // Save AI reply to DB

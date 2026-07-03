@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { Paperclip, Send, Leaf, Bug, Droplets, Calendar, BarChart, Download, X, File as FileIcon, Loader2, ThumbsUp, ThumbsDown } from 'lucide-react';
+import { useSearchParams, useNavigate } from 'react-router-dom';
+import { Paperclip, Send, Leaf, Bug, Droplets, Calendar, BarChart, Download, X, File as FileIcon, Loader2, ThumbsUp, ThumbsDown, MessageSquarePlus } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import api from '../lib/axios';
 
@@ -18,6 +18,7 @@ export default function ChatPage() {
     const [sessionId, setSessionId] = useState<number | null>(null);
     const [loading, setLoading] = useState(false);
     const [searchParams] = useSearchParams();
+    const navigate = useNavigate();
     
     // Feedback State
     const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
@@ -26,6 +27,7 @@ export default function ChatPage() {
     
     const fileInputRef = useRef<HTMLInputElement>(null);
     const messagesEndRef = useRef<HTMLDivElement>(null);
+    const textareaRef = useRef<HTMLTextAreaElement>(null);
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -46,6 +48,9 @@ export default function ChatPage() {
                     content: m.content
                 })));
             }).catch(err => console.error("Error loading session:", err));
+        } else {
+            setSessionId(null);
+            setMessages([]);
         }
     }, [searchParams]);
 
@@ -111,6 +116,9 @@ export default function ChatPage() {
 
         setInput('');
         setSelectedFile(null);
+        if (textareaRef.current) {
+            textareaRef.current.style.height = 'auto';
+        }
 
         try {
             const response = await api.post('/user/chat/message', formData, {
@@ -142,7 +150,20 @@ export default function ChatPage() {
     };
 
     return (
-        <div className="flex flex-col h-full bg-[#F8FAFC]">
+        <div className="flex flex-col h-full bg-[#F8FAFC] relative">
+            {sessionId && (
+                <div className="absolute top-4 right-6 md:right-10 z-20">
+                    <Button 
+                        variant="outline" 
+                        size="sm" 
+                        onClick={() => navigate('/chat')}
+                        className="bg-white hover:bg-gray-50 text-[#0F3B2C] border-[#D1F4E0] shadow-sm rounded-full px-5 py-5 border-2"
+                    >
+                        <MessageSquarePlus size={18} className="md:mr-2" strokeWidth={2.5} /> <span className="hidden md:inline font-bold">Percakapan Baru</span>
+                    </Button>
+                </div>
+            )}
+            
             {/* Main Chat Area */}
             <div className="flex-1 overflow-y-auto p-4 md:p-8 flex flex-col items-center">
                 {messages.length === 0 ? (
@@ -183,7 +204,7 @@ export default function ChatPage() {
                         </div>
                     </>
                 ) : (
-                    <div className="w-full max-w-3xl flex flex-col gap-6">
+                    <div className="w-full max-w-3xl flex flex-col gap-6 relative mt-10 md:mt-0">
                         {messages.map((msg) => (
                             <div key={msg.id} className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
                                 <div className={`max-w-[85%] p-4 rounded-2xl ${msg.role === 'user' ? 'bg-[#0F3B2C] text-white rounded-tr-sm' : 'bg-white border border-gray-200 text-gray-800 rounded-tl-sm shadow-sm'}`}>
@@ -249,7 +270,7 @@ export default function ChatPage() {
                         </div>
                     )}
 
-                    <div className="bg-white border border-gray-200 rounded-2xl p-2 flex items-center shadow-sm">
+                    <div className="bg-white border border-gray-200 rounded-2xl p-2 flex items-end shadow-sm">
                         <input
                             type="file"
                             accept=".jpg,.jpeg,.png,.txt"
@@ -264,19 +285,25 @@ export default function ChatPage() {
                         >
                             <Paperclip size={20} />
                         </button>
-                        <input
-                            type="text"
-                            className="flex-1 bg-transparent border-none outline-none px-2 text-gray-700 placeholder-gray-400"
+                        <textarea
+                            ref={textareaRef}
+                            className="flex-1 bg-transparent border-none outline-none px-2 py-3 text-gray-700 placeholder-gray-400 resize-none overflow-y-auto"
+                            style={{ minHeight: '44px', maxHeight: '150px' }}
+                            rows={1}
                             placeholder="Tanya AI seputar pertanian hijau disini..."
                             value={input}
-                            onChange={(e) => setInput(e.target.value)}
+                            onChange={(e) => {
+                                setInput(e.target.value);
+                                e.target.style.height = 'auto';
+                                e.target.style.height = `${e.target.scrollHeight}px`;
+                            }}
                             onKeyDown={handleKeyDown}
                             disabled={loading}
                         />
                         <button 
                             onClick={handleSend}
                             disabled={loading || (!input.trim() && !selectedFile)}
-                            className="p-3 bg-[#0F3B2C] text-white rounded-xl hover:bg-[#154E3A] transition-colors ml-2 disabled:opacity-50"
+                            className="p-3 bg-[#0F3B2C] text-white rounded-full hover:bg-[#154E3A] transition-colors ml-2 disabled:opacity-50"
                         >
                             <Send size={18} />
                         </button>

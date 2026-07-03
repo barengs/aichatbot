@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { MessageSquare, Clock, ArrowRight } from 'lucide-react';
+import { MessageSquare, Clock, ArrowRight, Search } from 'lucide-react';
 import api from '../../lib/axios';
 
 interface ChatSession {
@@ -13,6 +13,7 @@ interface ChatSession {
 export default function ChatHistoryPage() {
     const [sessions, setSessions] = useState<ChatSession[]>([]);
     const [loading, setLoading] = useState(true);
+    const [searchQuery, setSearchQuery] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -35,6 +36,10 @@ export default function ChatHistoryPage() {
         });
     };
 
+    const filteredSessions = sessions.filter(session => 
+        session.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
     return (
         <div className="flex flex-col h-full bg-[#F8FAFC]">
             <div className="p-8 pb-4">
@@ -45,7 +50,18 @@ export default function ChatHistoryPage() {
                 </div>
             </div>
 
-            <div className="flex-1 p-8 m-0 flex flex-col h-full overflow-y-auto">
+            <div className="flex-1 px-8 pb-8 m-0 flex flex-col h-full overflow-y-auto">
+                {/* Search Bar - Centered */}
+                <div className="max-w-xl mx-auto w-full mb-8 relative">
+                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+                    <input
+                        type="text"
+                        placeholder="Cari riwayat percakapan..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="w-full pl-11 pr-4 py-3 border border-gray-200 rounded-xl text-[15px] focus:outline-none focus:ring-2 focus:ring-[#0F3B2C]/20 focus:border-[#0F3B2C] shadow-sm bg-white"
+                    />
+                </div>
                 {loading ? (
                     <div className="flex items-center justify-center h-full">
                         <div className="w-8 h-8 rounded-full border-4 border-[#0F3B2C] border-t-transparent animate-spin"></div>
@@ -64,13 +80,21 @@ export default function ChatHistoryPage() {
                             Chat Sekarang
                         </button>
                     </div>
+                ) : filteredSessions.length === 0 ? (
+                    <div className="flex flex-col items-center justify-center h-full text-center">
+                        <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4 text-gray-400">
+                            <Search size={32} />
+                        </div>
+                        <h3 className="text-lg font-bold text-gray-900 mb-1">Tidak ditemukan</h3>
+                        <p className="text-gray-500">Tidak ada riwayat chat yang cocok dengan pencarian Anda.</p>
+                    </div>
                 ) : (
-                    <div className="max-w-4xl mx-auto w-full flex flex-col gap-2">
-                        {sessions.map((session) => (
+                    <div className="max-w-4xl mx-auto w-full flex flex-col gap-1">
+                        {filteredSessions.map((session) => (
                             <div 
                                 key={session.id} 
                                 onClick={() => navigate(`/chat?session=${session.id}`)}
-                                className="group flex items-center justify-between p-4 bg-white rounded-lg border border-transparent hover:border-gray-200 hover:shadow-sm cursor-pointer transition-all"
+                                className="group flex items-center justify-between py-1.5 px-4 bg-white rounded-md border border-transparent hover:border-gray-200 hover:shadow-sm cursor-pointer transition-all"
                             >
                                 <div className="flex items-center gap-4 flex-1 min-w-0">
                                     <div className="text-gray-400 group-hover:text-[#0F3B2C] transition-colors shrink-0">

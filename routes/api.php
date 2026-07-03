@@ -20,11 +20,28 @@ Route::middleware('auth:api')->group(function () {
     Route::put('/profile', [\App\Http\Controllers\Api\ProfileController::class, 'update']);
 
     // Admin Routes
-    Route::middleware('role:admin')->prefix('admin')->group(function () {
-        Route::get('analytics', [AdminController::class, 'getAnalytics']);
-        Route::apiResource('users', AdminController::class);
-        Route::get('settings', [AdminController::class, 'getSettings']);
-        Route::post('settings', [AdminController::class, 'updateSettings']);
+    Route::prefix('admin')->group(function () {
+        // Analytics
+        Route::middleware('permission:read_analytics')->get('analytics', [AdminController::class, 'getAnalytics']);
+        
+        // Users
+        Route::middleware('permission:read_users')->get('users', [AdminController::class, 'index']);
+        Route::middleware('permission:create_users')->post('users', [AdminController::class, 'store']);
+        Route::middleware('permission:read_users')->get('users/{user}', [AdminController::class, 'show']);
+        Route::middleware('permission:update_users')->put('users/{user}', [AdminController::class, 'update']);
+        Route::middleware('permission:delete_users')->delete('users/{user}', [AdminController::class, 'destroy']);
+
+        // Roles
+        Route::middleware('permission:read_roles')->get('permissions', [\App\Http\Controllers\Api\RoleController::class, 'getPermissions']);
+        Route::middleware('permission:read_roles|read_users')->get('roles', [\App\Http\Controllers\Api\RoleController::class, 'index']);
+        Route::middleware('permission:create_roles')->post('roles', [\App\Http\Controllers\Api\RoleController::class, 'store']);
+        Route::middleware('permission:read_roles')->get('roles/{role}', [\App\Http\Controllers\Api\RoleController::class, 'show']);
+        Route::middleware('permission:update_roles')->put('roles/{role}', [\App\Http\Controllers\Api\RoleController::class, 'update']);
+        Route::middleware('permission:delete_roles')->delete('roles/{role}', [\App\Http\Controllers\Api\RoleController::class, 'destroy']);
+
+        // Settings
+        Route::middleware('permission:read_settings')->get('settings', [AdminController::class, 'getSettings']);
+        Route::middleware('permission:update_settings')->post('settings', [AdminController::class, 'updateSettings']);
     });
 
     // User Routes (Guru & Siswa - role dan permission diatur dinamis)

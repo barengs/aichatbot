@@ -42,7 +42,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::with('roles')->get();
+        return response()->json($users);
     }
 
     /**
@@ -50,7 +51,22 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string|min:6',
+            'role_id' => 'required|exists:roles,id'
+        ]);
+
+        $user = User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => bcrypt($validated['password'])
+        ]);
+
+        $user->assignRole((int) $validated['role_id']);
+
+        return response()->json($user->load('roles'), 201);
     }
 
     /**
@@ -66,7 +82,27 @@ class AdminController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        $validated = $request->validate([
+            'name' => 'sometimes|string|max:255',
+            'email' => 'sometimes|email|unique:users,email,'.$id,
+            'password' => 'nullable|string|min:6',
+            'role_id' => 'sometimes|exists:roles,id'
+        ]);
+
+        if (isset($validated['name'])) $user->name = $validated['name'];
+        if (isset($validated['email'])) $user->email = $validated['email'];
+        if (isset($validated['password']) && $validated['password']) {
+            $user->password = bcrypt($validated['password']);
+        }
+        $user->save();
+
+        if (isset($validated['role_id'])) {
+            $user->syncRoles([(int) $validated['role_id']]);
+        }
+
+        return response()->json($user->load('roles'));
     }
 
     /**
@@ -74,7 +110,15 @@ class AdminController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        
+        // Prevent deleting the very first created user as safety net
+        if ($user->id === 1) {
+            return response()->json(['message' => 'Cannot delete the primary user.'], 403);
+        }
+        
+        $user->delete();
+        return response()->json(['message' => 'User deleted successfully.']);
     }
 
     public function getAnalytics()
