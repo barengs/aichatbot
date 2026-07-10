@@ -22,23 +22,25 @@
 - [x] Buat Seeder Master Data.
 
 ## Fase 3: Integrasi Core AI & RAG
-- [x] Konfigurasi OpenAI API Key.
+- [x] Konfigurasi OpenAI & Gemini API Key.
 - [x] Buat Job ekstraksi PDF ke teks.
 - [x] Buat Job Text Chunking.
 - [x] Buat Service Generate Embeddings (`text-embedding-3-small`).
-- [x] Integrasi Prism untuk prompt builder & LLM call (`gpt-4o-mini`).
-- [x] Implementasi Vector Similarity Search dengan Pinecone (via EchoLabs Prism).
+- [x] Integrasi Prism untuk prompt builder & LLM call (`gemini-3.5-flash`).
+- [x] Implementasi Vector Similarity Search dengan PostgreSQL pgvector.
 
 ## Fase 4: Modul Backend (API & Controller)
 - [x] **Modul Admin:** CRUD User, Setting AI Prompt & Parameter.
-- [x] **Modul Guru:** Upload Dokumen, Manajemen KB, Analitik, Monitoring Chat.
-- [x] **Modul Siswa:** Init Session, Kirim Pesan, Simpan Log, Feedback, Export Chat.
+- [x] **Modul Guru:** Upload Dokumen.
+- [ ] **Modul Guru:** Manajemen KB, Analitik, Monitoring Chat.
+- [x] **Modul Siswa:** Init Session, Kirim Pesan, Simpan Log, Hapus Sesi, Feedback.
+- [ ] **Modul Siswa:** Export Chat.
 
 ## Fase 5: Modul Frontend (React + Vite REST API)
 - [x] Setup Layout & API Auth Integration.
-- [x] **UI Siswa:** Chat Interface real-time, Sidebar Riwayat, Prompt Starter.
-- [x] **UI Guru:** Upload Dokumen, Dashboard Analitik, Log Chat.
-- [x] **UI Admin:** Manajemen Pengguna, Konfigurasi AI.
+- [x] **UI Siswa:** Chat Interface real-time, Upload File Chat, Sidebar Riwayat, Prompt Starter.
+- [ ] **UI Guru:** Dashboard Analitik, Log Chat, Upload Dokumen UI.
+- [ ] **UI Admin:** Manajemen Pengguna, Konfigurasi AI.
 
 ## Fase 6: Optimasi & Deployment
 - [ ] Konfigurasi Laravel Horizon (Queue Worker).
