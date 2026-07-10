@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { MessageSquare, Clock, ArrowRight, Search } from 'lucide-react';
+import { MessageSquare, Clock, ArrowRight, Search, Trash2 } from 'lucide-react';
 import api from '../../lib/axios';
 
 interface ChatSession {
@@ -16,14 +16,30 @@ export default function ChatHistoryPage() {
     const [searchQuery, setSearchQuery] = useState('');
     const navigate = useNavigate();
 
-    useEffect(() => {
+    const fetchSessions = () => {
+        setLoading(true);
         api.get('/user/chat/sessions')
-            .then(res => {
-                setSessions(res.data.sessions);
-            })
+            .then(res => setSessions(res.data.sessions))
             .catch(err => console.error("Error loading history:", err))
             .finally(() => setLoading(false));
+    };
+
+    useEffect(() => {
+        fetchSessions();
     }, []);
+
+    const handleDeleteSession = async (e: React.MouseEvent, id: number) => {
+        e.stopPropagation();
+        if (window.confirm('Yakin ingin menghapus riwayat obrolan ini?')) {
+            try {
+                await api.delete(`/user/chat/sessions/${id}`);
+                fetchSessions();
+            } catch (err) {
+                console.error("Gagal menghapus sesi", err);
+                alert("Gagal menghapus riwayat obrolan.");
+            }
+        }
+    };
 
     const formatDate = (dateString: string) => {
         const date = new Date(dateString);
@@ -112,6 +128,13 @@ export default function ChatHistoryPage() {
                                     <div className="w-16 text-right text-xs font-semibold text-gray-400 group-hover:text-[#0F3B2C] transition-colors">
                                         {session.messages_count} Pesan
                                     </div>
+                                    <button
+                                        onClick={(e) => handleDeleteSession(e, session.id)}
+                                        className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-md transition-all opacity-0 group-hover:opacity-100"
+                                        title="Hapus obrolan"
+                                    >
+                                        <Trash2 size={16} />
+                                    </button>
                                 </div>
                             </div>
                         ))}

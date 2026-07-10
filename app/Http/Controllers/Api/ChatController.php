@@ -178,4 +178,12 @@ class ChatController extends Controller
         $messages = $session->messages()->orderBy('id', 'asc')->get();
         return response()->json(['session' => $session, 'messages' => $messages]);
     }
+
+    public function deleteSession(Request $request, $id)
+    {
+        $session = ChatSession::where('user_id', $request->user()->id)->findOrFail($id);
+        $session->delete(); // Akan menghapus messages juga karena cascadeOnDelete
+        
+        return response()->json(['message' => 'Sesi chat berhasil dihapus.']);
+    }
 }
