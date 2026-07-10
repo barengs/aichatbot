@@ -12,7 +12,7 @@ class ExtractPdfJob implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct(public string $filePath)
+    public function __construct(public int $documentId)
     {
     }
 
@@ -21,12 +21,15 @@ class ExtractPdfJob implements ShouldQueue
      */
     public function handle(): void
     {
-        // 1. Ekstrak teks dari PDF
+        $document = \App\Models\Document::find($this->documentId);
+        if (!$document) return;
+
+        // 1. Ekstrak teks dari PDF (sesuaikan path jika tidak di storage)
         $text = (new \Spatie\PdfToText\Pdf())
-            ->setPdf($this->filePath)
+            ->setPdf(storage_path('app/' . $document->file_path))
             ->text();
 
-        // 2. Dispatch Job Chunking (belum dibuat)
-        // dispatch(new ChunkTextJob($this->filePath, $text));
+        // 2. Dispatch Job Chunking
+        dispatch(new ChunkTextJob($this->documentId, $text));
     }
 }
