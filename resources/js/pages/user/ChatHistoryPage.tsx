@@ -16,6 +16,9 @@ export default function ChatHistoryPage() {
     const [searchQuery, setSearchQuery] = useState('');
     const navigate = useNavigate();
 
+    const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+    const [sessionToDelete, setSessionToDelete] = useState<number | null>(null);
+
     const fetchSessions = () => {
         setLoading(true);
         api.get('/user/chat/sessions')
@@ -28,15 +31,22 @@ export default function ChatHistoryPage() {
         fetchSessions();
     }, []);
 
-    const handleDeleteSession = async (e: React.MouseEvent, id: number) => {
+    const confirmDelete = (e: React.MouseEvent, id: number) => {
         e.stopPropagation();
-        if (window.confirm('Yakin ingin menghapus riwayat obrolan ini?')) {
+        setSessionToDelete(id);
+        setDeleteModalOpen(true);
+    };
+
+    const executeDelete = async () => {
+        if (sessionToDelete) {
             try {
-                await api.delete(`/user/chat/sessions/${id}`);
+                await api.delete(`/user/chat/sessions/${sessionToDelete}`);
                 fetchSessions();
             } catch (err) {
                 console.error("Gagal menghapus sesi", err);
-                alert("Gagal menghapus riwayat obrolan.");
+            } finally {
+                setDeleteModalOpen(false);
+                setSessionToDelete(null);
             }
         }
     };
@@ -45,10 +55,8 @@ export default function ChatHistoryPage() {
         const date = new Date(dateString);
         return date.toLocaleDateString('id-ID', {
             day: 'numeric',
-            month: 'long',
-            year: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
+            month: 'short',
+            year: 'numeric'
         });
     };
 
@@ -129,7 +137,7 @@ export default function ChatHistoryPage() {
                                         {session.messages_count} Pesan
                                     </div>
                                     <button
-                                        onClick={(e) => handleDeleteSession(e, session.id)}
+                                        onClick={(e) => confirmDelete(e, session.id)}
                                         className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-md transition-all opacity-0 group-hover:opacity-100"
                                         title="Hapus obrolan"
                                     >
@@ -141,6 +149,32 @@ export default function ChatHistoryPage() {
                     </div>
                 )}
             </div>
+
+            {/* Custom Delete Modal */}
+            {deleteModalOpen && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200">
+                    <div className="bg-white rounded-2xl shadow-xl w-full max-w-sm overflow-hidden animate-in zoom-in-95 duration-200">
+                        <div className="p-6">
+                            <h3 className="text-lg font-bold text-gray-900 mb-2">Hapus Obrolan</h3>
+                            <p className="text-sm text-gray-500">Apakah Anda yakin ingin menghapus riwayat obrolan ini? Tindakan ini tidak dapat dibatalkan.</p>
+                        </div>
+                        <div className="p-4 bg-gray-50 border-t border-gray-100 flex justify-end gap-3">
+                            <button
+                                onClick={() => setDeleteModalOpen(false)}
+                                className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+                            >
+                                Batal
+                            </button>
+                            <button
+                                onClick={executeDelete}
+                                className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition-colors"
+                            >
+                                Ya, Hapus
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
