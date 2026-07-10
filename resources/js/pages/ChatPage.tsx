@@ -10,6 +10,7 @@ interface Message {
     role: 'user' | 'assistant';
     content: string;
     feedback?: 'positive' | 'negative';
+    attachment_name?: string;
 }
 
 export default function ChatPage() {
@@ -104,7 +105,12 @@ export default function ChatPage() {
         }
 
         // Add user message to UI immediately
-        const userMsg: Message = { id: Date.now().toString(), role: 'user', content: input };
+        const userMsg: Message = { 
+            id: Date.now().toString(), 
+            role: 'user', 
+            content: input,
+            attachment_name: selectedFile ? selectedFile.name : undefined
+        };
         setMessages(prev => [...prev, userMsg]);
         setLoading(true);
 
@@ -208,9 +214,15 @@ export default function ChatPage() {
                     <div className="w-full max-w-3xl flex flex-col gap-6 relative mt-10 md:mt-0">
                         {messages.map((msg) => (
                             <div key={msg.id} className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
+                                {msg.attachment_name && (
+                                    <div className="flex items-center gap-2 bg-[#E2F6EA] text-[#0F3B2C] px-3 py-1.5 rounded-lg mb-2 text-sm border border-[#D1F4E0]">
+                                        <FileIcon size={16} />
+                                        <span className="truncate max-w-[200px] font-medium">{msg.attachment_name}</span>
+                                    </div>
+                                )}
                                 <div className={`max-w-[85%] p-4 rounded-2xl ${msg.role === 'user' ? 'bg-[#0F3B2C] text-white rounded-tr-sm' : 'bg-white border border-gray-200 text-gray-800 rounded-tl-sm shadow-sm'}`}>
                                     <div className="prose prose-sm max-w-none prose-p:leading-relaxed prose-img:rounded-xl prose-img:shadow-md">
-                                        <ReactMarkdown>{msg.content}</ReactMarkdown>
+                                        <ReactMarkdown>{msg.content.split('\n\n[Teks dari file')[0]}</ReactMarkdown>
                                     </div>
                                 </div>
                                 {msg.role === 'assistant' && msg.id.length < 13 && ( // Simple check if it's a real DB ID, not Date.now()
@@ -276,7 +288,7 @@ export default function ChatPage() {
                     <div className="bg-white border border-gray-200 rounded-2xl p-2 flex items-end shadow-sm">
                         <input
                             type="file"
-                            accept=".jpg,.jpeg,.png,.txt"
+                            accept=".jpg,.jpeg,.png,.txt,.pdf"
                             className="hidden"
                             ref={fileInputRef}
                             onChange={handleFileChange}
