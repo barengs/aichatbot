@@ -11,12 +11,16 @@ import RoleManagementPage from './pages/admin/RoleManagementPage';
 import AISettingsPage from './pages/admin/AISettingsPage';
 import LoginPage from './pages/auth/LoginPage';
 import RegisterPage from './pages/auth/RegisterPage';
+import ForgotPasswordPage from './pages/auth/ForgotPasswordPage';
+import ResetPasswordPage from './pages/auth/ResetPasswordPage';
 
 export default function AppRoutes() {
     return (
         <Routes>
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
+            <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+            <Route path="/reset-password" element={<ResetPasswordPage />} />
             
             <Route element={<DashboardLayout />}>
                 <Route path="/" element={<Navigate to="/chat" replace />} />
