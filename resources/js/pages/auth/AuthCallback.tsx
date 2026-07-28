@@ -31,9 +31,9 @@ export default function AuthCallback() {
     }, [location, navigate, dispatch]);
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center bg-[#F8FAFC]">
+        <div className="min-h-screen flex flex-col items-center justify-center bg-[#F8FAFC] dark:bg-gray-900">
             <div className="w-12 h-12 border-4 border-[#0F3B2C] border-t-transparent rounded-full animate-spin mb-4"></div>
-            <p className="text-gray-600 font-medium">Authenticating...</p>
+            <p className="text-gray-600 dark:text-gray-400 font-medium">Authenticating...</p>
         </div>
     );
 }

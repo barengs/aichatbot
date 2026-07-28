@@ -50,33 +50,33 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-[#F8FAFC]">
-            <div className="w-full max-w-md p-8 bg-white rounded-xl shadow-sm border border-gray-100">
+        <div className="min-h-screen flex items-center justify-center bg-[#F8FAFC] dark:bg-gray-900">
+            <div className="w-full max-w-md p-8 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
                 <div className="flex flex-col items-center mb-8">
                     <div className="w-12 h-12 bg-[#0F3B2C] rounded-md flex items-center justify-center text-white mb-4">
                         <span className="text-xl font-bold">TA</span>
                     </div>
-                    <h2 className="text-2xl font-bold text-gray-900">Tanya AI</h2>
-                    <p className="text-sm text-gray-500 mt-1">Masuk dengan akun anda</p>
+                    <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Tanya AI</h2>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Masuk dengan akun anda</p>
                 </div>
 
                 <form onSubmit={handleLogin} className="space-y-4">
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
                         <input
                             type="email"
                             required
                             value={email}
                             onChange={e => setEmail(e.target.value)}
-                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#D1F4E0] focus:border-[#0F3B2C] outline-none"
+                            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-[#D1F4E0] focus:border-[#0F3B2C] outline-none"
                             placeholder="admin@smk.id"
                         />
                     </div>
 
                     <div>
                         <div className="flex items-center justify-between mb-1">
-                            <label className="block text-sm font-medium text-gray-700">Password</label>
-                            <Link to="/forgot-password" className="text-xs font-semibold text-[#0F3B2C] hover:underline">
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Password</label>
+                            <Link to="/forgot-password" className="text-xs font-semibold text-[#0F3B2C] dark:text-[#A3E5C2] hover:underline">
                                 Lupa password?
                             </Link>
                         </div>
@@ -85,7 +85,7 @@ export default function LoginPage() {
                             required
                             value={password}
                             onChange={e => setPassword(e.target.value)}
-                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#D1F4E0] focus:border-[#0F3B2C] outline-none"
+                            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-[#D1F4E0] focus:border-[#0F3B2C] outline-none"
                             placeholder="••••••••"
                         />
                     </div>
@@ -108,8 +108,8 @@ export default function LoginPage() {
                 </form>
 
                 <div className="relative flex items-center justify-center mb-6">
-                    <div className="absolute border-t border-gray-200 w-full"></div>
-                    <span className="bg-white px-3 text-sm text-gray-500 relative">Atau masuk dengan</span>
+                    <div className="absolute border-t border-gray-200 dark:border-gray-700 w-full"></div>
+                    <span className="bg-white dark:bg-gray-800 px-3 text-sm text-gray-500 dark:text-gray-400 relative">Atau masuk dengan</span>
                 </div>
 
                 <button
@@ -127,10 +127,10 @@ export default function LoginPage() {
                             setIsGoogleLoading(false);
                         }
                     }}
-                    className="w-full flex items-center justify-center gap-2 bg-white border border-gray-300 text-gray-700 py-2 rounded-md hover:bg-gray-50 transition-colors font-medium disabled:bg-gray-50"
+                    className="w-full flex items-center justify-center gap-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 py-2 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors font-medium disabled:bg-gray-50"
                 >
                     {isGoogleLoading ? (
-                        <svg className="animate-spin h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <svg className="animate-spin h-5 w-5 text-gray-500 dark:text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
@@ -146,8 +146,8 @@ export default function LoginPage() {
                     {isGoogleLoading ? 'Mengalihkan...' : 'Google'}
                 </button>
 
-                <p className="mt-8 text-center text-sm text-gray-600">
-                    Belum punya akun? <Link to="/register" className="text-[#0F3B2C] font-semibold hover:underline">Daftar</Link>
+                <p className="mt-8 text-center text-sm text-gray-600 dark:text-gray-400">
+                    Belum punya akun? <Link to="/register" className="text-[#0F3B2C] dark:text-[#A3E5C2] font-semibold hover:underline">Daftar</Link>
                 </p>
             </div>
         </div>

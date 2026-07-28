@@ -10,6 +10,17 @@ import { store } from './store';
 import AppRoutes from './AppRoutes';
 
 const el = document.getElementById('app');
+
+// Initialize dark mode based on localStorage or OS default globally
+if (typeof window !== 'undefined') {
+    const isDark = localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    if (isDark) {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark');
+    }
+}
+
 if (el) {
     const root = createRoot(el);
     root.render(
