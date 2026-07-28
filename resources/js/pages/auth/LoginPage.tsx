@@ -41,7 +41,7 @@ export default function LoginPage() {
             // 3. Redirect
             navigate('/chat');
         } catch (err: any) {
-            const errorMsg = err.response?.data?.error || err.response?.data?.message || 'Login failed. Please check your credentials.';
+            const errorMsg = err.response?.data?.error || err.response?.data?.message || 'Login gagal. Periksa email dan password Anda.';
             setError(errorMsg);
             toast.error(errorMsg, { id: loadingToast });
         } finally {
@@ -101,7 +101,7 @@ export default function LoginPage() {
                         disabled={loading}
                         className="w-full bg-[#0F3B2C] text-white py-2 rounded-md hover:bg-[#0c2f23] transition-colors disabled:opacity-50"
                     >
-                        {loading ? 'Signing in...' : 'Sign In'}
+                        {loading ? 'Sedang masuk...' : 'Masuk'}
                     </button>
                 </form>
 
@@ -119,7 +119,7 @@ export default function LoginPage() {
                             toast.success('Mengalihkan...', { id: googleToast });
                             window.location.href = res.data.url;
                         } catch (err) {
-                            setError('Failed to initialize Google login');
+                            setError('Gagal memulai login Google');
                             toast.error('Gagal menghubungi server', { id: googleToast });
                         }
                     }}
