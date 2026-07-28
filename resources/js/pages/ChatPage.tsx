@@ -157,14 +157,14 @@ export default function ChatPage() {
     };
 
     return (
-        <div className="flex flex-col h-full bg-[#F8FAFC] relative">
+        <div className="flex flex-col h-full bg-[#F8FAFC] dark:bg-gray-900 relative">
             {sessionId && (
                 <div className="absolute top-4 right-6 md:right-10 z-20">
                     <Button 
                         variant="outline" 
                         size="sm" 
                         onClick={() => navigate('/chat')}
-                        className="bg-white hover:bg-gray-50 text-[#0F3B2C] border-[#D1F4E0] shadow-sm rounded-full px-5 py-5 border-2"
+                        className="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-[#0F3B2C] dark:text-green-400 border-[#D1F4E0] dark:border-gray-600 shadow-sm rounded-full px-5 py-5 border-2"
                     >
                         <MessageSquarePlus size={18} className="md:mr-2" strokeWidth={2.5} /> <span className="hidden md:inline font-bold">Percakapan Baru</span>
                     </Button>
@@ -175,38 +175,38 @@ export default function ChatPage() {
             <div className="flex-1 overflow-y-auto p-4 md:p-8 flex flex-col items-center">
                 {messages.length === 0 ? (
                     <>
-                        <div className="w-16 h-16 bg-[#D1F4E0] text-[#0F3B2C] rounded-2xl flex items-center justify-center mb-6 mt-10">
+                        <div className="w-16 h-16 bg-[#D1F4E0] dark:bg-green-900/30 text-[#0F3B2C] dark:text-green-400 rounded-2xl flex items-center justify-center mb-6 mt-10">
                             <Leaf size={32} />
                         </div>
-                        <h1 className="text-3xl font-bold text-[#0F3B2C] mb-2 text-center">Selamat Datang di Tanya AI</h1>
-                        <p className="text-gray-500 mb-12 text-center max-w-lg">
+                        <h1 className="text-3xl font-bold text-[#0F3B2C] dark:text-white mb-2 text-center">Selamat Datang di Tanya AI</h1>
+                        <p className="text-gray-500 dark:text-gray-400 mb-12 text-center max-w-lg">
                             Tanya asisten AI untuk solusi pertanian presisi, hama tanaman, hingga strategi budidaya modern sesuai kurikulum SMK.
                         </p>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl w-full">
                             {/* Starter 1 */}
-                            <div onClick={() => setInput("Bagaimana cara atasi hama wereng secara organik?")} className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm hover:border-[#D1F4E0] hover:shadow-md cursor-pointer transition-all">
-                                <Bug className="text-[#0F3B2C] mb-3" size={24} />
-                                <h3 className="font-semibold text-gray-900">Atasi Hama Wereng</h3>
-                                <p className="text-sm text-gray-500 mt-1">Solusi organik dan kimiawi terkendali.</p>
+                            <div onClick={() => setInput("Bagaimana cara atasi hama wereng secara organik?")} className="bg-white dark:bg-gray-800 p-5 rounded-xl border border-gray-100 dark:border-transparent shadow-sm hover:border-[#D1F4E0] dark:hover:border-gray-600 hover:shadow-md cursor-pointer transition-all">
+                                <Bug className="text-[#0F3B2C] dark:text-green-400 mb-3" size={24} />
+                                <h3 className="font-semibold text-gray-900 dark:text-white">Atasi Hama Wereng</h3>
+                                <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Solusi organik dan kimiawi terkendali.</p>
                             </div>
                             {/* Starter 2 */}
-                            <div onClick={() => setInput("Apa formula AB Mix yang tepat untuk hidroponik selada?")} className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm hover:border-[#D1F4E0] hover:shadow-md cursor-pointer transition-all">
-                                <Droplets className="text-[#0F3B2C] mb-3" size={24} />
-                                <h3 className="font-semibold text-gray-900">Nutrisi Hidroponik</h3>
-                                <p className="text-sm text-gray-500 mt-1">Formula AB Mix untuk tanaman selada.</p>
+                            <div onClick={() => setInput("Apa formula AB Mix yang tepat untuk hidroponik selada?")} className="bg-white dark:bg-gray-800 p-5 rounded-xl border border-gray-100 dark:border-transparent shadow-sm hover:border-[#D1F4E0] dark:hover:border-gray-600 hover:shadow-md cursor-pointer transition-all">
+                                <Droplets className="text-[#0F3B2C] dark:text-green-400 mb-3" size={24} />
+                                <h3 className="font-semibold text-gray-900 dark:text-white">Nutrisi Hidroponik</h3>
+                                <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Formula AB Mix untuk tanaman selada.</p>
                             </div>
                             {/* Starter 3 */}
-                            <div onClick={() => setInput("Berdasarkan cuaca tahun ini, kapan jadwal tanam padi yang optimal?")} className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm hover:border-[#D1F4E0] hover:shadow-md cursor-pointer transition-all">
-                                <Calendar className="text-[#0F3B2C] mb-3" size={24} />
-                                <h3 className="font-semibold text-gray-900">Jadwal Tanam Padi</h3>
-                                <p className="text-sm text-gray-500 mt-1">Prediksi cuaca & kalender musim 2024.</p>
+                            <div onClick={() => setInput("Berdasarkan cuaca tahun ini, kapan jadwal tanam padi yang optimal?")} className="bg-white dark:bg-gray-800 p-5 rounded-xl border border-gray-100 dark:border-transparent shadow-sm hover:border-[#D1F4E0] dark:hover:border-gray-600 hover:shadow-md cursor-pointer transition-all">
+                                <Calendar className="text-[#0F3B2C] dark:text-green-400 mb-3" size={24} />
+                                <h3 className="font-semibold text-gray-900 dark:text-white">Jadwal Tanam Padi</h3>
+                                <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Prediksi cuaca & kalender musim 2024.</p>
                             </div>
                             {/* Starter 4 */}
-                            <div onClick={() => setInput("Bagaimana cara interpretasi hasil cek lab pH dan NPK tanah?")} className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm hover:border-[#D1F4E0] hover:shadow-md cursor-pointer transition-all">
-                                <BarChart className="text-[#0F3B2C] mb-3" size={24} />
-                                <h3 className="font-semibold text-gray-900">Analisis Tanah SMK</h3>
-                                <p className="text-sm text-gray-500 mt-1">Interpretasi hasil cek lab pH & NPK.</p>
+                            <div onClick={() => setInput("Bagaimana cara interpretasi hasil cek lab pH dan NPK tanah?")} className="bg-white dark:bg-gray-800 p-5 rounded-xl border border-gray-100 dark:border-transparent shadow-sm hover:border-[#D1F4E0] dark:hover:border-gray-600 hover:shadow-md cursor-pointer transition-all">
+                                <BarChart className="text-[#0F3B2C] dark:text-green-400 mb-3" size={24} />
+                                <h3 className="font-semibold text-gray-900 dark:text-white">Analisis Tanah SMK</h3>
+                                <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Interpretasi hasil cek lab pH & NPK.</p>
                             </div>
                         </div>
                     </>
@@ -261,20 +261,20 @@ export default function ChatPage() {
             </div>
 
             {/* Input Area */}
-            <div className="p-6 bg-[#F8FAFC]">
+            <div className="p-6 bg-[#F8FAFC] dark:bg-gray-900">
                 <div className="max-w-3xl mx-auto relative">
 
 
 
 
                     {selectedFile && (
-                        <div className="mb-3 bg-white border border-gray-200 rounded-xl p-2 flex items-center gap-3 shadow-sm w-fit">
-                            <div className="bg-[#D1F4E0] text-[#0F3B2C] p-2 rounded-lg">
+                        <div className="mb-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-transparent rounded-xl p-2 flex items-center gap-3 shadow-sm w-fit">
+                            <div className="bg-[#D1F4E0] dark:bg-green-900/30 text-[#0F3B2C] dark:text-green-400 p-2 rounded-lg">
                                 <FileIcon size={16} />
                             </div>
                             <div className="flex flex-col pr-4">
-                                <span className="text-sm font-medium text-gray-800 truncate max-w-[200px]">{selectedFile.name}</span>
-                                <span className="text-xs text-gray-500">{(selectedFile.size / 1024).toFixed(1)} KB</span>
+                                <span className="text-sm font-medium text-gray-800 dark:text-gray-200 truncate max-w-[200px]">{selectedFile.name}</span>
+                                <span className="text-xs text-gray-500 dark:text-gray-400">{(selectedFile.size / 1024).toFixed(1)} KB</span>
                             </div>
                             <button
                                 onClick={() => setSelectedFile(null)}
@@ -285,7 +285,7 @@ export default function ChatPage() {
                         </div>
                     )}
 
-                    <div className="bg-white border border-gray-200 rounded-2xl p-2 flex items-end shadow-sm">
+                    <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-transparent rounded-2xl p-2 flex items-end shadow-sm">
                         <input
                             type="file"
                             accept=".jpg,.jpeg,.png,.txt,.pdf"
@@ -294,7 +294,7 @@ export default function ChatPage() {
                             onChange={handleFileChange}
                         />
                         <button
-                            className="p-3 text-gray-400 hover:text-[#0F3B2C] transition-colors disabled:opacity-50"
+                            className="p-3 text-gray-400 hover:text-[#0F3B2C] dark:hover:text-green-400 transition-colors disabled:opacity-50"
                             onClick={() => fileInputRef.current?.click()}
                             disabled={loading}
                         >
@@ -302,7 +302,7 @@ export default function ChatPage() {
                         </button>
                         <textarea
                             ref={textareaRef}
-                            className="flex-1 bg-transparent border-none outline-none px-2 py-3 text-gray-700 placeholder-gray-400 resize-none overflow-y-auto"
+                            className="flex-1 bg-transparent border-none outline-none px-2 py-3 text-gray-700 dark:text-gray-200 placeholder-gray-400 dark:placeholder-gray-500 resize-none overflow-y-auto"
                             style={{ minHeight: '44px', maxHeight: '150px' }}
                             rows={1}
                             placeholder="Tanya AI seputar pertanian hijau disini..."
