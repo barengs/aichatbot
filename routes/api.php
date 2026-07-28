@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\AdminController;
 use App\Http\Controllers\Api\ChatController;
+use App\Http\Controllers\Api\DocumentController;
 
 // Auth Routes
 Route::post('/register', [AuthController::class, 'register']);
@@ -52,5 +53,9 @@ Route::middleware('auth:api')->group(function () {
         Route::post('chat/feedback', [\App\Http\Controllers\Api\ChatController::class, 'submitFeedback']);
         Route::get('chat/sessions', [\App\Http\Controllers\Api\ChatController::class, 'getSessions']);
         Route::get('chat/sessions/{id}', [\App\Http\Controllers\Api\ChatController::class, 'getSessionMessages']);
+        Route::delete('chat/sessions/{id}', [\App\Http\Controllers\Api\ChatController::class, 'deleteSession']);
+
+        // Upload Dokumen (PDF) untuk RAG (Guru/Admin)
+        Route::post('documents', [DocumentController::class, 'store']);
     });
 });

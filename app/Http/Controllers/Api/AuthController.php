@@ -16,7 +16,7 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (! $token = auth('api')->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json(['error' => 'Email atau kata sandi yang Anda masukkan salah.'], 401);
         }
 
         return $this->respondWithToken($token);
@@ -53,6 +53,12 @@ class AuthController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
+        ], [
+            'email.unique' => 'Email ini sudah terdaftar.',
+            'password.min' => 'Kata sandi minimal 8 karakter.',
+            'email.required' => 'Email wajib diisi.',
+            'password.required' => 'Kata sandi wajib diisi.',
+            'name.required' => 'Nama wajib diisi.'
         ]);
 
         $user = User::create([

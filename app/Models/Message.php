@@ -11,7 +11,8 @@ class Message extends Model
         'role',
         'content',
         'prompt_tokens',
-        'completion_tokens'
+        'completion_tokens',
+        'attachment_name'
     ];
 
     public function chatSession()

@@ -13,7 +13,7 @@ class PasswordResetController extends Controller
 {
     public function sendResetLinkEmail(Request $request)
     {
-        $request->validate(['email' => 'required|email']);
+        $request->validate(['email' => 'required|email'], ['email.required' => 'Email wajib diisi.', 'email.email' => 'Format email tidak valid.']);
 
         $status = Password::broker()->sendResetLink(
             $request->only('email')
@@ -30,6 +30,13 @@ class PasswordResetController extends Controller
             'token' => 'required',
             'email' => 'required|email',
             'password' => 'required|min:8|confirmed',
+        ], [
+            'email.required' => 'Email wajib diisi.',
+            'email.email' => 'Format email tidak valid.',
+            'password.required' => 'Kata sandi wajib diisi.',
+            'password.min' => 'Kata sandi minimal 8 karakter.',
+            'password.confirmed' => 'Konfirmasi kata sandi tidak cocok.',
+            'token.required' => 'Token tidak valid atau sudah kedaluwarsa.'
         ]);
 
         $status = Password::broker()->reset(

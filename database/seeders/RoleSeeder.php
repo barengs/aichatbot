@@ -30,9 +30,5 @@ class RoleSeeder extends Seeder
         $admin = \Spatie\Permission\Models\Role::firstOrCreate(['name' => 'admin', 'guard_name' => 'api']);
         $admin->syncPermissions($permissions);
 
-        $user = \App\Models\User::first();
-        if ($user) {
-            $user->assignRole($admin);
-        }
     }
 }

@@ -83,61 +83,61 @@ export default function UserManagementPage() {
         setModalOpen(true);
     };
     return (
-        <div className="flex flex-col h-full bg-[#F8FAFC]">
+        <div className="flex flex-col h-full bg-[#F8FAFC] dark:bg-gray-900">
             <div className="p-8 pb-4">
                 <div className="mb-2">
-                    <p className="text-xs text-gray-500 font-medium mb-1">Admin / <span className="text-gray-900 font-bold">System Console</span></p>
-                    <h1 className="text-3xl font-bold text-[#0F3B2C]">Management Center</h1>
-                    <p className="text-sm text-gray-500 mt-1">Configure users and AI model parameters for TaniCerdas SMK.</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400 font-medium mb-1">Admin / <span className="text-gray-900 dark:text-white font-bold">System Console</span></p>
+                    <h1 className="text-3xl font-bold text-[#0F3B2C] dark:text-[#A3E5C2]">Management Center</h1>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Configure users and AI model parameters for TaniCerdas SMK.</p>
                 </div>
             </div>
             <div className="flex-1 p-8 m-0 flex flex-col h-full">
                 <div className="flex justify-between items-center mb-6">
                     <div className="relative w-96">
                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
-                        <Input className="pl-10 rounded-md bg-white border-gray-200 focus-visible:ring-[#0F3B2C] shadow-sm" placeholder="Search by name or email..." />
+                        <Input className="pl-10 rounded-md bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 focus-visible:ring-[#0F3B2C] shadow-sm" placeholder="Search by name or email..." />
                     </div>
-                    <Button onClick={openAddModal} className="bg-[#0F3B2C] hover:bg-[#154E3A] rounded-md px-6 flex items-center gap-2">
+                    <Button onClick={openAddModal} className="bg-[#0F3B2C] text-white hover:bg-[#154E3A] rounded-md px-6 flex items-center gap-2">
                         <UserPlus size={16} /> Add New Admin
                     </Button>
                 </div>
 
-                <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+                <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm overflow-hidden">
                     <Table>
-                        <TableHeader className="bg-gray-50">
+                        <TableHeader className="bg-gray-50 dark:bg-gray-900/50">
                             <TableRow>
-                                <TableHead className="font-semibold text-gray-600">Name</TableHead>
-                                <TableHead className="font-semibold text-gray-600">Email</TableHead>
-                                <TableHead className="font-semibold text-gray-600">ID</TableHead>
-                                <TableHead className="font-semibold text-gray-600">Role</TableHead>
-                                <TableHead className="font-semibold text-gray-600 text-center">Actions</TableHead>
+                                <TableHead className="font-semibold text-gray-600 dark:text-gray-300">Name</TableHead>
+                                <TableHead className="font-semibold text-gray-600 dark:text-gray-300">Email</TableHead>
+                                <TableHead className="font-semibold text-gray-600 dark:text-gray-300">ID</TableHead>
+                                <TableHead className="font-semibold text-gray-600 dark:text-gray-300">Role</TableHead>
+                                <TableHead className="font-semibold text-gray-600 dark:text-gray-300 text-center">Actions</TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
                             {loading ? (
                                 <TableRow>
-                                    <TableCell colSpan={5} className="text-center py-8 text-gray-500">Loading admins...</TableCell>
+                                    <TableCell colSpan={5} className="text-center py-8 text-gray-500 dark:text-gray-400">Loading admins...</TableCell>
                                 </TableRow>
                             ) : users.length === 0 ? (
                                 <TableRow>
-                                    <TableCell colSpan={5} className="text-center py-8 text-gray-500">No admins found.</TableCell>
+                                    <TableCell colSpan={5} className="text-center py-8 text-gray-500 dark:text-gray-400">No admins found.</TableCell>
                                 </TableRow>
                             ) : (
                                 users.map(user => (
                                     <TableRow key={user.id} className="group">
                                         <TableCell className="font-medium">
                                             <div className="flex items-center gap-3">
-                                                <div className="w-8 h-8 rounded-full bg-gray-200 text-gray-700 flex items-center justify-center text-xs font-bold">
+                                                <div className="w-8 h-8 rounded-full bg-gray-200 text-gray-700 dark:text-gray-300 flex items-center justify-center text-xs font-bold">
                                                     <Shield size={14} />
                                                 </div>
-                                                <span className="text-gray-900 font-medium">{user.name}</span>
+                                                <span className="text-gray-900 dark:text-white font-medium">{user.name}</span>
                                             </div>
                                         </TableCell>
-                                        <TableCell className="text-gray-600">{user.email}</TableCell>
-                                        <TableCell className="text-gray-600 font-mono text-sm">{user.id}</TableCell>
+                                        <TableCell className="text-gray-600 dark:text-gray-300">{user.email}</TableCell>
+                                        <TableCell className="text-gray-600 dark:text-gray-300 font-mono text-sm">{user.id}</TableCell>
                                         <TableCell><Badge className="bg-gray-800 text-white hover:bg-gray-700 shadow-none capitalize">{user.roles?.[0]?.name || 'User'}</Badge></TableCell>
                                         <TableCell className="text-center space-x-1">
-                                            <Button onClick={() => openEditModal(user)} variant="ghost" size="icon" className="text-gray-400 hover:text-gray-700 h-8 w-8"><Edit2 size={16} /></Button>
+                                            <Button onClick={() => openEditModal(user)} variant="ghost" size="icon" className="text-gray-400 hover:text-gray-700 dark:text-gray-300 h-8 w-8"><Edit2 size={16} /></Button>
                                             <Button onClick={() => handleDelete(user.id)} variant="ghost" size="icon" className="text-gray-400 hover:text-red-600 h-8 w-8"><Trash2 size={16} /></Button>
                                         </TableCell>
                                     </TableRow>
@@ -146,7 +146,7 @@ export default function UserManagementPage() {
                         </TableBody>
                     </Table>
 
-                    <div className="p-4 border-t border-gray-200 bg-white flex items-center justify-between text-sm text-gray-500">
+                    <div className="p-4 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 flex items-center justify-between text-sm text-gray-500 dark:text-gray-400">
                         <span>Total {users.length} admin(s)</span>
                     </div>
                 </div>
@@ -154,25 +154,25 @@ export default function UserManagementPage() {
 
             {modalOpen && (
                 <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-                    <div className="bg-white rounded-xl shadow-xl w-full max-w-md overflow-hidden">
-                        <div className="p-4 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
-                            <h3 className="font-bold text-gray-900">{editingUser ? 'Edit Admin' : 'Add New Admin'}</h3>
-                            <button onClick={() => setModalOpen(false)} className="text-gray-400 hover:text-gray-600">
+                    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl w-full max-w-md overflow-hidden">
+                        <div className="p-4 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center bg-gray-50 dark:bg-gray-900/50">
+                            <h3 className="font-bold text-gray-900 dark:text-white">{editingUser ? 'Edit Admin' : 'Add New Admin'}</h3>
+                            <button onClick={() => setModalOpen(false)} className="text-gray-400 hover:text-gray-600 dark:text-gray-300">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
                             </button>
                         </div>
                         <form onSubmit={handleSubmit} className="p-5 flex flex-col gap-4">
                             <div>
-                                <label className="block text-xs font-medium text-gray-700 mb-1">Name</label>
+                                <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Name</label>
                                 <Input required value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} placeholder="Admin Name" />
                             </div>
                             <div>
-                                <label className="block text-xs font-medium text-gray-700 mb-1">Email</label>
+                                <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
                                 <Input type="email" required value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} placeholder="admin@example.com" />
                             </div>
                             <div>
-                                <label className="block text-xs font-medium text-gray-700 mb-1">Role</label>
-                                <select required value={formData.role_id} onChange={(e) => setFormData({...formData, role_id: e.target.value})} className="w-full h-10 px-3 py-2 rounded-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0F3B2C]/20 focus:border-[#0F3B2C] text-sm">
+                                <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Role</label>
+                                <select required value={formData.role_id} onChange={(e) => setFormData({...formData, role_id: e.target.value})} className="w-full h-10 px-3 py-2 rounded-md border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-[#0F3B2C]/20 focus:border-[#0F3B2C] text-sm">
                                     <option value="" disabled>Select a role...</option>
                                     {roles.map(r => (
                                         <option key={r.id} value={r.id}>{r.name.replace('_', ' ').toUpperCase()}</option>
@@ -180,12 +180,12 @@ export default function UserManagementPage() {
                                 </select>
                             </div>
                             <div>
-                                <label className="block text-xs font-medium text-gray-700 mb-1">Password {editingUser && '(Leave empty to keep current)'}</label>
+                                <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Password {editingUser && '(Leave empty to keep current)'}</label>
                                 <Input type="password" required={!editingUser} value={formData.password} onChange={(e) => setFormData({...formData, password: e.target.value})} placeholder="******" />
                             </div>
                             <div className="flex justify-end gap-3 mt-4">
                                 <Button type="button" variant="outline" onClick={() => setModalOpen(false)}>Cancel</Button>
-                                <Button type="submit" className="bg-[#0F3B2C] hover:bg-[#154E3A]">Save Admin</Button>
+                                <Button type="submit" className="bg-[#0F3B2C] text-white hover:bg-[#154E3A]">Save Admin</Button>
                             </div>
                         </form>
                     </div>

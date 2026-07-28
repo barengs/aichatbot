@@ -72,7 +72,7 @@
     "src": "node_modules/@fontsource-variable/geist/files/geist-vietnamese-wght-normal.woff2"
   },
   "resources/css/app.css": {
-    "file": "assets/app-54o6wgIS.css",
+    "file": "assets/app-Bk_Agf-f.css",
     "name": "app",
     "names": [
       "app.css"
@@ -88,12 +88,13 @@
     ]
   },
   "resources/js/app.tsx": {
-    "file": "assets/app-CwP5JUeO.js",
+    "file": "assets/app-CwOW2X2B.js",
     "name": "app",
     "src": "resources/js/app.tsx",
     "isEntry": true,
     "css": [
-      "assets/app-54o6wgIS.css"
+      "assets/app-qcT314-W.css",
+      "assets/app-Bk_Agf-f.css"
     ],
     "assets": [
       "assets/geist-cyrillic-ext-wght-normal-DjL33-gN.woff2",

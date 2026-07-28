@@ -1,12 +1,15 @@
+import toast from "react-hot-toast";
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import api from '../../lib/axios';
 
 export default function ResetPasswordPage() {
-    const { token } = useParams<{ token: string }>();
+    const searchParams = new URLSearchParams(useLocation().search);
+    const token = searchParams.get("token") || "";
+    const emailFromUrl = searchParams.get("email") || "";
     const location = useLocation();
     
-    const [email, setEmail] = useState('');
+    const [email, setEmail] = useState(emailFromUrl);
     const [password, setPassword] = useState('');
     const [passwordConfirmation, setPasswordConfirmation] = useState('');
     const [message, setMessage] = useState('');
@@ -43,26 +46,29 @@ export default function ResetPasswordPage() {
                 token 
             });
             setMessage(res.data.message || 'Password berhasil direset. Anda akan dialihkan ke halaman login...');
+            toast.success('Password berhasil direset!');
             
             setTimeout(() => {
                 navigate('/login');
             }, 3000);
         } catch (err: any) {
-            setError(err.response?.data?.email?.[0] || err.response?.data?.password?.[0] || err.response?.data?.message || 'Gagal mereset password.');
+            const errorMsg = err.response?.data?.email?.[0] || err.response?.data?.password?.[0] || err.response?.data?.message || 'Gagal mereset password.';
+            setError(errorMsg);
+            toast.error(errorMsg);
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-[#F8FAFC]">
-            <div className="w-full max-w-md p-8 bg-white rounded-xl shadow-sm border border-gray-100">
+        <div className="min-h-screen flex items-center justify-center bg-[#F8FAFC] dark:bg-gray-900">
+            <div className="w-full max-w-md p-8 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
                 <div className="flex flex-col items-center mb-8">
                     <div className="w-12 h-12 bg-[#0F3B2C] rounded-md flex items-center justify-center text-white mb-4">
                         <span className="text-xl font-bold">TA</span>
                     </div>
-                    <h2 className="text-2xl font-bold text-gray-900">Reset Password</h2>
-                    <p className="text-sm text-gray-500 mt-1 text-center">Buat password baru untuk akun Anda.</p>
+                    <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Reset Password</h2>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1 text-center">Buat password baru untuk akun Anda.</p>
                 </div>
 
                 {message && (
@@ -79,38 +85,38 @@ export default function ResetPasswordPage() {
 
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
                         <input
                             type="email"
                             required
                             readOnly
                             value={email}
-                            className="w-full px-4 py-2 border border-gray-300 rounded-md bg-gray-50 text-gray-500 outline-none cursor-not-allowed"
+                            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-gray-50 text-gray-500 dark:text-gray-400 outline-none cursor-not-allowed"
                         />
                     </div>
 
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Password Baru</label>
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Password Baru</label>
                         <input
                             type="password"
                             required
                             minLength={8}
                             value={password}
                             onChange={e => setPassword(e.target.value)}
-                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#D1F4E0] focus:border-[#0F3B2C] outline-none"
+                            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-[#D1F4E0] focus:border-[#0F3B2C] outline-none"
                             placeholder="Minimal 8 karakter"
                         />
                     </div>
 
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Konfirmasi Password</label>
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Konfirmasi Password</label>
                         <input
                             type="password"
                             required
                             minLength={8}
                             value={passwordConfirmation}
                             onChange={e => setPasswordConfirmation(e.target.value)}
-                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#D1F4E0] focus:border-[#0F3B2C] outline-none"
+                            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-[#D1F4E0] focus:border-[#0F3B2C] outline-none"
                             placeholder="Ulangi password baru"
                         />
                     </div>

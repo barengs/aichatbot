@@ -25,14 +25,14 @@ export default function ForgotPasswordPage() {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-[#F8FAFC]">
-            <div className="w-full max-w-md p-8 bg-white rounded-xl shadow-sm border border-gray-100">
+        <div className="min-h-screen flex items-center justify-center bg-[#F8FAFC] dark:bg-gray-900">
+            <div className="w-full max-w-md p-8 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
                 <div className="flex flex-col items-center mb-8">
                     <div className="w-12 h-12 bg-[#0F3B2C] rounded-md flex items-center justify-center text-white mb-4">
                         <span className="text-xl font-bold">TA</span>
                     </div>
-                    <h2 className="text-2xl font-bold text-gray-900">Lupa Password</h2>
-                    <p className="text-sm text-gray-500 mt-1 text-center">Masukkan email Anda untuk mereset password.</p>
+                    <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Lupa Password</h2>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1 text-center">Masukkan email Anda untuk mereset password.</p>
                 </div>
 
                 {message && (
@@ -49,13 +49,13 @@ export default function ForgotPasswordPage() {
 
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
                         <input
                             type="email"
                             required
                             value={email}
                             onChange={e => setEmail(e.target.value)}
-                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#D1F4E0] focus:border-[#0F3B2C] outline-none"
+                            className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-[#D1F4E0] focus:border-[#0F3B2C] outline-none"
                             placeholder="email@sekolah.id"
                         />
                     </div>
@@ -69,8 +69,8 @@ export default function ForgotPasswordPage() {
                     </button>
                 </form>
 
-                <p className="mt-8 text-center text-sm text-gray-600">
-                    Ingat password Anda? <Link to="/login" className="text-[#0F3B2C] font-semibold hover:underline">Masuk</Link>
+                <p className="mt-8 text-center text-sm text-gray-600 dark:text-gray-400">
+                    Ingat password Anda? <Link to="/login" className="text-[#0F3B2C] dark:text-[#A3E5C2] font-semibold hover:underline">Masuk</Link>
                 </p>
             </div>
         </div>

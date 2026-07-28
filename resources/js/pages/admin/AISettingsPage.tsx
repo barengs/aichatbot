@@ -46,24 +46,24 @@ export default function AISettingsPage() {
     };
 
     return (
-        <div className="flex flex-col h-full bg-[#F8FAFC]">
+        <div className="flex flex-col h-full bg-[#F8FAFC] dark:bg-gray-900">
             <div className="p-8 pb-4">
                 <div className="mb-2">
-                    <p className="text-xs text-gray-500 font-medium mb-1">Admin / <span className="text-gray-900 font-bold">System Console</span></p>
-                    <h1 className="text-3xl font-bold text-[#0F3B2C]">AI Settings</h1>
-                    <p className="text-sm text-gray-500 mt-1">Configure AI model parameters for TaniCerdas SMK.</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400 font-medium mb-1">Admin / <span className="text-gray-900 dark:text-white font-bold">System Console</span></p>
+                    <h1 className="text-3xl font-bold text-[#0F3B2C] dark:text-[#A3E5C2]">AI Settings</h1>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Configure AI model parameters for TaniCerdas SMK.</p>
                 </div>
             </div>
 
             <div className="flex-1 p-8 m-0 outline-none flex flex-col h-full">
-                <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-8 text-left max-w-3xl flex-1">
-                    <h2 className="text-lg font-semibold text-gray-900 mb-6">AI Model Parameters</h2>
+                <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-8 text-left max-w-3xl flex-1">
+                    <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">AI Model Parameters</h2>
                     <div className="space-y-6">
                         <div className="grid grid-cols-2 gap-6">
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">AI Provider</label>
+                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">AI Provider</label>
                                 <select 
-                                    className="w-full h-10 rounded-md border border-gray-200 px-3 bg-white focus:outline-none focus:ring-2 focus:ring-[#0F3B2C]/20 focus:border-[#0F3B2C] text-sm"
+                                    className="w-full h-10 rounded-md border border-gray-200 dark:border-gray-700 px-3 bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-[#0F3B2C]/20 focus:border-[#0F3B2C] text-sm"
                                     value={aiProvider}
                                     onChange={(e) => setAiProvider(e.target.value)}
                                 >
@@ -73,7 +73,7 @@ export default function AISettingsPage() {
                                 </select>
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Default Model</label>
+                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Default Model</label>
                                 <Input 
                                     type="text" 
                                     placeholder="e.g., gemini-1.5-pro" 
@@ -85,7 +85,7 @@ export default function AISettingsPage() {
                         </div>
                         
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">API Key</label>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">API Key</label>
                             <Input 
                                 type="password" 
                                 placeholder="Enter your API key" 
@@ -93,13 +93,13 @@ export default function AISettingsPage() {
                                 value={apiKey}
                                 onChange={(e) => setApiKey(e.target.value)}
                             />
-                            <p className="text-xs text-gray-500 mt-1">Your API key is encrypted and stored securely.</p>
+                            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Your API key is encrypted and stored securely.</p>
                         </div>
                         
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">System Prompt</label>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">System Prompt</label>
                             <textarea 
-                                className="w-full rounded-md border border-gray-200 p-3 bg-white focus:outline-none focus:ring-2 focus:ring-[#0F3B2C]/20 focus:border-[#0F3B2C] text-sm min-h-[120px]" 
+                                className="w-full rounded-md border border-gray-200 dark:border-gray-700 p-3 bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-[#0F3B2C]/20 focus:border-[#0F3B2C] text-sm min-h-[120px]" 
                                 placeholder="You are a helpful agricultural assistant for SMK students..."
                                 value={systemPrompt}
                                 onChange={(e) => setSystemPrompt(e.target.value)}
@@ -109,14 +109,14 @@ export default function AISettingsPage() {
                 </div>
 
                 {/* Bottom Action Bar */}
-                <div className="mt-8 p-4 bg-white border border-gray-200 flex items-center justify-between rounded-xl shadow-sm max-w-3xl">
-                    <span className="text-sm text-gray-500 font-medium">Last applied: <span className="text-gray-900 font-bold">{lastApplied === 'Never' ? 'Never' : `${lastApplied} by admin`}</span></span>
+                <div className="mt-8 p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 flex items-center justify-between rounded-xl shadow-sm max-w-3xl">
+                    <span className="text-sm text-gray-500 dark:text-gray-400 font-medium">Last applied: <span className="text-gray-900 dark:text-white font-bold">{lastApplied === 'Never' ? 'Never' : `${lastApplied} by admin`}</span></span>
                     <div className="flex gap-3">
                         <Button variant="outline" className="rounded-md px-6">Discard Changes</Button>
                         <Button 
                             onClick={handleSave}
                             disabled={isSaving}
-                            className="bg-[#0F3B2C] hover:bg-[#154E3A] rounded-md px-6 flex items-center gap-2 disabled:opacity-70"
+                            className="bg-[#0F3B2C] text-white hover:bg-[#154E3A] rounded-md px-6 flex items-center gap-2 disabled:opacity-70"
                         >
                             {isSaving ? (
                                 <div className="w-4 h-4 rounded-full border-2 border-white border-t-transparent animate-spin mr-1"></div>
