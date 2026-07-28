@@ -118,27 +118,27 @@ export default function ChatHistoryPage() {
                             <div 
                                 key={session.id} 
                                 onClick={() => navigate(`/chat?session=${session.id}`)}
-                                className="group flex items-center justify-between py-1.5 px-4 bg-white dark:bg-gray-800 rounded-md border border-transparent hover:border-gray-200 dark:hover:border-gray-600 hover:shadow-sm cursor-pointer transition-all"
+                                className="group flex flex-col sm:flex-row items-start sm:items-center justify-between p-5 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm hover:border-[#D1F4E0] dark:hover:border-gray-500 hover:shadow-md cursor-pointer transition-all gap-4"
                             >
-                                <div className="flex items-center gap-4 flex-1 min-w-0">
-                                    <div className="text-gray-400 dark:text-gray-500 group-hover:text-[#0F3B2C] dark:group-hover:text-green-400 transition-colors shrink-0">
-                                        <MessageSquare size={18} />
+                                <div className="flex items-center gap-4 flex-1 min-w-0 w-full">
+                                    <div className="p-3 bg-gray-50 dark:bg-gray-900 rounded-lg text-gray-500 dark:text-gray-400 group-hover:text-[#0F3B2C] dark:group-hover:text-green-400 group-hover:bg-[#E2F6EA] dark:group-hover:bg-green-900/30 transition-colors shrink-0">
+                                        <MessageSquare size={22} />
                                     </div>
-                                    <h3 className="text-[15px] font-medium text-gray-800 dark:text-gray-200 truncate group-hover:text-[#0F3B2C] dark:group-hover:text-green-400 transition-colors">
+                                    <h3 className="text-base sm:text-lg font-semibold text-gray-800 dark:text-gray-100 truncate group-hover:text-[#0F3B2C] dark:group-hover:text-green-400 transition-colors">
                                         {session.title}
                                     </h3>
                                 </div>
-                                <div className="flex items-center gap-6 shrink-0 ml-4">
-                                    <div className="hidden sm:flex items-center gap-1 text-xs text-gray-400 dark:text-gray-500">
-                                        <Clock size={14} />
+                                <div className="flex items-center justify-between sm:justify-end gap-6 shrink-0 w-full sm:w-auto">
+                                    <div className="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400">
+                                        <Clock size={16} />
                                         <span>{formatDate(session.updated_at)}</span>
                                     </div>
-                                    <div className="w-16 text-right text-xs font-semibold text-gray-400 dark:text-gray-500 group-hover:text-[#0F3B2C] dark:group-hover:text-green-400 transition-colors">
+                                    <div className="text-sm font-semibold text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full group-hover:bg-[#E2F6EA] dark:group-hover:bg-green-900/30 group-hover:text-[#0F3B2C] dark:group-hover:text-green-400 transition-colors">
                                         {session.messages_count} Pesan
                                     </div>
                                     <button
                                         onClick={(e) => confirmDelete(e, session.id)}
-                                        className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-md transition-all opacity-0 group-hover:opacity-100"
+                                        className="p-2.5 text-gray-500 dark:text-gray-400 hover:text-red-500 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/30 rounded-lg transition-all border border-gray-200 dark:border-gray-600 hover:border-red-200 dark:hover:border-red-800"
                                         title="Hapus obrolan"
                                     >
                                         <Trash2 size={16} />
