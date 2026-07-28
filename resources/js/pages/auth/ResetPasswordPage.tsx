@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import api from '../../lib/axios';
@@ -45,12 +46,15 @@ export default function ResetPasswordPage() {
                 token 
             });
             setMessage(res.data.message || 'Password berhasil direset. Anda akan dialihkan ke halaman login...');
+            toast.success('Password berhasil direset!');
             
             setTimeout(() => {
                 navigate('/login');
             }, 3000);
         } catch (err: any) {
-            setError(err.response?.data?.email?.[0] || err.response?.data?.password?.[0] || err.response?.data?.message || 'Gagal mereset password.');
+            const errorMsg = err.response?.data?.email?.[0] || err.response?.data?.password?.[0] || err.response?.data?.message || 'Gagal mereset password.';
+            setError(errorMsg);
+            toast.error(errorMsg);
         } finally {
             setLoading(false);
         }
