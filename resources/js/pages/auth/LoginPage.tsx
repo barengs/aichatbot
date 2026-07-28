@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setCredentials } from '../../features/auth/authSlice';
 import api from '../../lib/axios';
+import toast from 'react-hot-toast';
 
 export default function LoginPage() {
     const [email, setEmail] = useState('');
@@ -17,6 +18,7 @@ export default function LoginPage() {
         e.preventDefault();
         setError('');
         setLoading(true);
+        const loadingToast = toast.loading('Sedang masuk...');
 
         try {
             // 1. Get Token
@@ -34,10 +36,14 @@ export default function LoginPage() {
             // 2. Dispatch to Redux
             dispatch(setCredentials({ user, token }));
 
+            toast.success(loginRes.data?.message || 'Berhasil masuk', { id: loadingToast });
+
             // 3. Redirect
             navigate('/chat');
         } catch (err: any) {
-            setError(err.response?.data?.error || 'Login failed. Please check your credentials.');
+            const errorMsg = err.response?.data?.error || err.response?.data?.message || 'Login failed. Please check your credentials.';
+            setError(errorMsg);
+            toast.error(errorMsg, { id: loadingToast });
         } finally {
             setLoading(false);
         }
@@ -107,11 +113,14 @@ export default function LoginPage() {
                 <button
                     type="button"
                     onClick={async () => {
+                        const googleToast = toast.loading('Menghubungkan ke Google...');
                         try {
                             const res = await api.get('/auth/google/redirect');
+                            toast.success('Mengalihkan...', { id: googleToast });
                             window.location.href = res.data.url;
                         } catch (err) {
                             setError('Failed to initialize Google login');
+                            toast.error('Gagal menghubungi server', { id: googleToast });
                         }
                     }}
                     className="w-full flex items-center justify-center gap-2 bg-white border border-gray-300 text-gray-700 py-2 rounded-md hover:bg-gray-50 transition-colors font-medium"

@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../store';
 import { logout } from '../features/auth/authSlice';
 import api from '../lib/axios';
+import toast from 'react-hot-toast';
 
 export default function DashboardLayout() {
     const user = useSelector((state: RootState) => state.auth.user);
@@ -29,10 +30,12 @@ export default function DashboardLayout() {
     const isAdminAreaVisible = canViewAnalytics || canManageUsers || canManageRoles || canManageSettings;
 
     const handleLogout = async () => {
+        const loadingToast = toast.loading('Proses keluar...');
         try {
-            await api.post('/logout');
-        } catch (e) {
-            // Ignore if it fails on server
+            const res = await api.post('/logout');
+            toast.success(res.data?.message || 'Berhasil keluar', { id: loadingToast });
+        } catch (e: any) {
+            toast.error(e.response?.data?.message || 'Sesi sudah berakhir', { id: loadingToast });
         }
         dispatch(logout());
         navigate('/login');
