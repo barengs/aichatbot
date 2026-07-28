@@ -33,7 +33,8 @@ export default function RegisterPage() {
             dispatch(setCredentials({ user, token }));
             navigate('/chat');
         } catch (err: any) {
-            setError(err.response?.data?.message || 'Registration failed. Please check your details.');
+            const errorMsg = err.response?.data?.errors?.email?.[0] || err.response?.data?.errors?.password?.[0] || err.response?.data?.message || 'Registrasi gagal. Periksa kembali data Anda.';
+            setError(errorMsg);
         } finally {
             setLoading(false);
         }
