@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../store';
 import { logout } from '../features/auth/authSlice';
 import api from '../lib/axios';
-import toast from 'react-hot-toast';
+import { toast } from 'react-toastify';
 
 export default function DashboardLayout() {
     const user = useSelector((state: RootState) => state.auth.user);
@@ -47,12 +47,11 @@ export default function DashboardLayout() {
     const isAdminAreaVisible = canViewAnalytics || canManageUsers || canManageRoles || canManageSettings;
 
     const handleLogout = async () => {
-        const loadingToast = toast.loading('Proses keluar...');
         try {
             const res = await api.post('/logout');
-            toast.success(res.data?.message || 'Berhasil keluar', { id: loadingToast });
+            toast.success(res.data?.message || 'Berhasil keluar');
         } catch (e: any) {
-            toast.error(e.response?.data?.message || 'Sesi sudah berakhir', { id: loadingToast });
+            toast.error(e.response?.data?.message || 'Sesi sudah berakhir');
         }
         dispatch(logout());
         navigate('/login');
@@ -69,7 +68,7 @@ export default function DashboardLayout() {
             )}
             
             {/* Sidebar */}
-            <aside className={`bg-[#F8FAFC] dark:bg-gray-900 border-r border-gray-200 dark:border-transparent flex flex-col transition-all duration-300 fixed md:relative z-40 inset-y-0 left-0 transform ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 ${isCollapsed ? 'md:w-20 w-64' : 'w-64'}`}>
+            <aside className={`bg-[#F8FAFC] dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700 shadow-sm flex flex-col transition-all duration-300 fixed md:relative z-40 inset-y-0 left-0 transform ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 ${isCollapsed ? 'md:w-20 w-64' : 'w-64'}`}>
                 <div className={`p-6 flex flex-col ${isCollapsed ? 'items-center px-2' : ''}`}>
                     <h1 className={`text-xl font-bold text-gray-900 dark:text-white flex items-center ${isCollapsed ? 'justify-center' : 'gap-2'}`}>
                         <div className="w-8 h-8 bg-[#0F3B2C] rounded-md flex items-center justify-center text-white shrink-0">
@@ -173,7 +172,7 @@ export default function DashboardLayout() {
                     )}
                 </nav>
 
-                <div className="p-4 border-t border-gray-200 dark:border-transparent space-y-2">
+                <div className="p-4 border-t border-gray-200 dark:border-gray-700 space-y-2">
                     {user ? (
                         <>
                             <button className={`flex items-center ${isCollapsed ? 'md:justify-center justify-start' : 'gap-3'} px-3 py-2 w-full text-left rounded-md text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700`} title="Pengaturan">
@@ -197,7 +196,7 @@ export default function DashboardLayout() {
             {/* Main Content */}
             <main className="flex-1 flex flex-col bg-white dark:bg-gray-800 overflow-hidden">
                 {/* Global Header */}
-                <header className="h-16 border-b border-gray-200 dark:border-transparent flex items-center justify-between px-6 shrink-0">
+                <header className="h-16 border-b border-gray-200 dark:border-gray-700 shadow-sm flex items-center justify-between px-6 shrink-0">
                     <div className="flex items-center gap-4">
                         {/* Mobile Toggle */}
                         <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="text-gray-500 dark:text-gray-400 hover:text-gray-700 md:hidden block">

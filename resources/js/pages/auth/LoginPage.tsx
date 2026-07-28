@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setCredentials } from '../../features/auth/authSlice';
 import api from '../../lib/axios';
-import toast from 'react-hot-toast';
+import { toast } from 'react-toastify';
 
 export default function LoginPage() {
     const [email, setEmail] = useState('');
@@ -19,7 +19,6 @@ export default function LoginPage() {
         e.preventDefault();
         setError('');
         setLoading(true);
-        const loadingToast = toast.loading('Sedang masuk...');
 
         try {
             // 1. Get Token
@@ -37,14 +36,14 @@ export default function LoginPage() {
             // 2. Dispatch to Redux
             dispatch(setCredentials({ user, token }));
 
-            toast.success(loginRes.data?.message || 'Berhasil masuk', { id: loadingToast });
+            toast.success(loginRes.data?.message || 'Berhasil masuk');
 
             // 3. Redirect
             navigate('/chat');
         } catch (err: any) {
             const errorMsg = err.response?.data?.error || err.response?.data?.message || 'Login gagal. Periksa email dan password Anda.';
             setError(errorMsg);
-            toast.error(errorMsg, { id: loadingToast });
+            toast.error(errorMsg);
         } finally {
             setLoading(false);
         }
@@ -60,12 +59,6 @@ export default function LoginPage() {
                     <h2 className="text-2xl font-bold text-gray-900">Tanya AI</h2>
                     <p className="text-sm text-gray-500 mt-1">Masuk dengan akun anda</p>
                 </div>
-
-                {error && (
-                    <div className="bg-red-50 text-red-600 p-3 rounded-md text-sm mb-4">
-                        {error}
-                    </div>
-                )}
 
                 <form onSubmit={handleLogin} className="space-y-4">
                     <div>
@@ -124,14 +117,13 @@ export default function LoginPage() {
                     disabled={isGoogleLoading}
                     onClick={async () => {
                         setIsGoogleLoading(true);
-                        const googleToast = toast.loading('Menghubungkan ke Google...');
                         try {
                             const res = await api.get('/auth/google/redirect');
-                            toast.success('Mengalihkan...', { id: googleToast });
+                            toast.success('Mengalihkan...');
                             window.location.href = res.data.url;
                         } catch (err) {
                             setError('Gagal memulai login Google');
-                            toast.error('Gagal menghubungi server', { id: googleToast });
+                            toast.error('Gagal menghubungi server');
                             setIsGoogleLoading(false);
                         }
                     }}
