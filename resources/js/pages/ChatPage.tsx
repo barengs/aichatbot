@@ -159,20 +159,24 @@ export default function ChatPage() {
     return (
         <div className="flex flex-col h-full bg-[#F8FAFC] dark:bg-gray-900 relative">
             {sessionId && (
-                <div className="absolute top-4 left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-10 z-30 w-max">
-                    <Button 
-                        variant="outline" 
-                        size="sm" 
-                        onClick={() => navigate('/chat')}
-                        className="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-[#0F3B2C] dark:text-green-400 border-[#D1F4E0] dark:border-gray-600 shadow-md rounded-full px-5 py-2 border-2 flex items-center justify-center"
-                    >
-                        <MessageSquarePlus size={20} className="mr-2" strokeWidth={2.5} /> <span className="font-bold">Percakapan Baru</span>
-                    </Button>
+                <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-[#F8FAFC] via-[#F8FAFC]/80 to-transparent dark:from-gray-900 dark:via-gray-900/80 z-30 pointer-events-none">
+                    <div className="pt-4 flex justify-center w-full">
+                        <div className="pointer-events-auto shadow-sm rounded-full">
+                            <Button 
+                                variant="outline" 
+                                size="sm" 
+                                onClick={() => navigate('/chat')}
+                                className="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-[#0F3B2C] dark:text-green-400 border-[#D1F4E0] dark:border-gray-600 shadow-md rounded-full px-5 py-2 border-2 flex items-center justify-center"
+                            >
+                                <MessageSquarePlus size={20} className="mr-2" strokeWidth={2.5} /> <span className="font-bold">Percakapan Baru</span>
+                            </Button>
+                        </div>
+                    </div>
                 </div>
             )}
             
             {/* Main Chat Area */}
-            <div className="flex-1 overflow-y-auto p-4 pt-20 md:p-8 flex flex-col items-center">
+            <div className="flex-1 overflow-y-auto p-4 pt-24 md:p-8 md:pt-28 flex flex-col items-center">
                 {messages.length === 0 ? (
                     <>
                         <div className="w-16 h-16 bg-[#D1F4E0] dark:bg-green-900/30 text-[#0F3B2C] dark:text-green-400 rounded-2xl flex items-center justify-center mb-6 mt-10">
