@@ -116,7 +116,7 @@ export default function AISettingsPage() {
                         <Button 
                             onClick={handleSave}
                             disabled={isSaving}
-                            className="bg-[#0F3B2C] hover:bg-[#154E3A] rounded-md px-6 flex items-center gap-2 disabled:opacity-70"
+                            className="bg-[#0F3B2C] text-white hover:bg-[#154E3A] rounded-md px-6 flex items-center gap-2 disabled:opacity-70"
                         >
                             {isSaving ? (
                                 <div className="w-4 h-4 rounded-full border-2 border-white border-t-transparent animate-spin mr-1"></div>

@@ -85,7 +85,7 @@ export default function DashboardLayout() {
                             <NavLink
                                 to="/chat"
                                 onClick={() => setIsMobileMenuOpen(false)}
-                                className={({ isActive }) => `flex items-center ${isCollapsed ? 'md:justify-center justify-start' : 'gap-3'} px-3 py-2 rounded-md text-sm font-medium ${isActive ? 'bg-[#D1F4E0] text-[#0F3B2C]' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'}`}
+                                className={({ isActive }) => `flex items-center ${isCollapsed ? 'md:justify-center justify-start' : 'gap-3'} px-3 py-2 rounded-md text-sm font-medium ${isActive ? 'bg-[#D1F4E0] text-[#0F3B2C] dark:bg-[#0c2f23] dark:text-[#A3E5C2]' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'}`}
                                 title="Chat"
                             >
                                 <MessageSquare size={18} className="shrink-0" />
@@ -96,7 +96,7 @@ export default function DashboardLayout() {
                                     <NavLink
                                         to="/history"
                                         onClick={() => setIsMobileMenuOpen(false)}
-                                        className={({ isActive }) => `flex items-center ${isCollapsed ? 'md:justify-center justify-start' : 'gap-3'} px-3 py-2 rounded-md text-sm font-medium ${isActive ? 'bg-[#D1F4E0] text-[#0F3B2C]' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'}`}
+                                        className={({ isActive }) => `flex items-center ${isCollapsed ? 'md:justify-center justify-start' : 'gap-3'} px-3 py-2 rounded-md text-sm font-medium ${isActive ? 'bg-[#D1F4E0] text-[#0F3B2C] dark:bg-[#0c2f23] dark:text-[#A3E5C2]' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'}`}
                                         title="Riwayat Chat"
                                     >
                                         <History size={18} className="shrink-0" />
@@ -105,7 +105,7 @@ export default function DashboardLayout() {
                                     <NavLink
                                         to="/profile"
                                         onClick={() => setIsMobileMenuOpen(false)}
-                                        className={({ isActive }) => `flex items-center ${isCollapsed ? 'md:justify-center justify-start' : 'gap-3'} px-3 py-2 rounded-md text-sm font-medium ${isActive ? 'bg-[#D1F4E0] text-[#0F3B2C]' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'}`}
+                                        className={({ isActive }) => `flex items-center ${isCollapsed ? 'md:justify-center justify-start' : 'gap-3'} px-3 py-2 rounded-md text-sm font-medium ${isActive ? 'bg-[#D1F4E0] text-[#0F3B2C] dark:bg-[#0c2f23] dark:text-[#A3E5C2]' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'}`}
                                         title="Profil"
                                     >
                                         <UserCircle size={18} className="shrink-0" />
@@ -126,7 +126,7 @@ export default function DashboardLayout() {
                                 <NavLink
                                     to="/analytics"
                                     onClick={() => setIsMobileMenuOpen(false)}
-                                    className={({ isActive }) => `flex items-center ${isCollapsed ? 'md:justify-center justify-start' : 'gap-3'} px-3 py-2 rounded-md text-sm font-medium ${isActive ? 'bg-[#D1F4E0] text-[#0F3B2C]' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'}`}
+                                    className={({ isActive }) => `flex items-center ${isCollapsed ? 'md:justify-center justify-start' : 'gap-3'} px-3 py-2 rounded-md text-sm font-medium ${isActive ? 'bg-[#D1F4E0] text-[#0F3B2C] dark:bg-[#0c2f23] dark:text-[#A3E5C2]' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'}`}
                                     title="Dashboard"
                                 >
                                     <LayoutDashboard size={18} className="shrink-0" />
@@ -138,7 +138,7 @@ export default function DashboardLayout() {
                                 <NavLink
                                     to="/users"
                                     onClick={() => setIsMobileMenuOpen(false)}
-                                    className={({ isActive }) => `flex items-center ${isCollapsed ? 'md:justify-center justify-start' : 'gap-3'} px-3 py-2 rounded-md text-sm font-medium ${isActive ? 'bg-[#D1F4E0] text-[#0F3B2C]' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'}`}
+                                    className={({ isActive }) => `flex items-center ${isCollapsed ? 'md:justify-center justify-start' : 'gap-3'} px-3 py-2 rounded-md text-sm font-medium ${isActive ? 'bg-[#D1F4E0] text-[#0F3B2C] dark:bg-[#0c2f23] dark:text-[#A3E5C2]' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'}`}
                                     title="User Management"
                                 >
                                     <Users size={18} className="shrink-0" />
@@ -150,7 +150,7 @@ export default function DashboardLayout() {
                                 <NavLink
                                     to="/roles"
                                     onClick={() => setIsMobileMenuOpen(false)}
-                                    className={({ isActive }) => `flex items-center ${isCollapsed ? 'md:justify-center justify-start' : 'gap-3'} px-3 py-2 rounded-md text-sm font-medium ${isActive ? 'bg-[#D1F4E0] text-[#0F3B2C]' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'}`}
+                                    className={({ isActive }) => `flex items-center ${isCollapsed ? 'md:justify-center justify-start' : 'gap-3'} px-3 py-2 rounded-md text-sm font-medium ${isActive ? 'bg-[#D1F4E0] text-[#0F3B2C] dark:bg-[#0c2f23] dark:text-[#A3E5C2]' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'}`}
                                     title="Role Management"
                                 >
                                     <Shield size={18} className="shrink-0" />
@@ -162,7 +162,7 @@ export default function DashboardLayout() {
                                 <NavLink
                                     to="/ai-settings"
                                     onClick={() => setIsMobileMenuOpen(false)}
-                                    className={({ isActive }) => `flex items-center ${isCollapsed ? 'md:justify-center justify-start' : 'gap-3'} px-3 py-2 rounded-md text-sm font-medium ${isActive ? 'bg-[#D1F4E0] text-[#0F3B2C]' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'}`}
+                                    className={({ isActive }) => `flex items-center ${isCollapsed ? 'md:justify-center justify-start' : 'gap-3'} px-3 py-2 rounded-md text-sm font-medium ${isActive ? 'bg-[#D1F4E0] text-[#0F3B2C] dark:bg-[#0c2f23] dark:text-[#A3E5C2]' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'}`}
                                     title="AI Settings"
                                 >
                                     <Database size={18} className="shrink-0" />
@@ -225,7 +225,7 @@ export default function DashboardLayout() {
                                         {user.name ? user.name.charAt(0).toUpperCase() : 'U'}
                                     </span>
                                 </div>
-                                <span className="px-3 py-1 bg-[#D1F4E0] text-[#0F3B2C] rounded-full text-xs font-semibold">
+                                <span className="px-3 py-1 bg-[#D1F4E0] text-[#0F3B2C] dark:bg-[#0c2f23] dark:text-[#A3E5C2] rounded-full text-xs font-semibold">
                                     {user?.roles?.length ? user.roles.map(r => r.name.charAt(0).toUpperCase() + r.name.slice(1)).join(', ') : 'User'}
                                 </span>
                             </div>

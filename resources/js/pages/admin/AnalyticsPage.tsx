@@ -69,7 +69,7 @@ export default function AnalyticsPage() {
                         <CalendarIcon className="mr-2 h-4 w-4" />
                         Minggu Ini
                     </Button>
-                    <Button className="bg-[#0F3B2C] hover:bg-[#154E3A]">
+                    <Button className="bg-[#0F3B2C] text-white hover:bg-[#154E3A]">
                         <Download className="mr-2 h-4 w-4" />
                         Laporan PDF
                     </Button>
@@ -102,7 +102,7 @@ export default function AnalyticsPage() {
                     <CardContent className="space-y-3">
                         <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
-                                <Badge variant="secondary" className="bg-[#D1F4E0] text-[#0F3B2C] dark:text-[#A3E5C2]">Hama</Badge>
+                                <Badge variant="secondary" className="bg-[#D1F4E0] dark:bg-[#0c2f23] text-[#0F3B2C] dark:text-[#A3E5C2]">Hama</Badge>
                                 <span className="text-sm font-semibold">45%</span>
                             </div>
                             <Bug size={16} className="text-[#0F3B2C] dark:text-[#A3E5C2]" />
@@ -219,7 +219,7 @@ export default function AnalyticsPage() {
                             <TableRow key={chat.id}>
                                 <TableCell className="font-medium">
                                     <div className="flex items-center gap-3">
-                                        <div className="w-8 h-8 rounded-full bg-[#D1F4E0] text-[#0F3B2C] dark:text-[#A3E5C2] flex items-center justify-center text-xs font-bold">{chat.user_initials}</div>
+                                        <div className="w-8 h-8 rounded-full bg-[#D1F4E0] dark:bg-[#0c2f23] text-[#0F3B2C] dark:text-[#A3E5C2] flex items-center justify-center text-xs font-bold">{chat.user_initials}</div>
                                         <div>
                                             <p className="text-sm text-gray-900 dark:text-white">{chat.user_name}</p>
                                             <p className="text-xs text-gray-500 dark:text-gray-400 font-normal">{chat.user_school}</p>
@@ -229,7 +229,7 @@ export default function AnalyticsPage() {
                                 <TableCell className="text-gray-600 dark:text-gray-300 text-sm truncate max-w-xs">"{chat.last_message}"</TableCell>
                                 <TableCell><Badge variant="outline" className="bg-green-50 text-green-700 border-green-200 font-medium">{chat.status}</Badge></TableCell>
                                 <TableCell className="text-right">
-                                    <Button size="sm" className="bg-[#0F3B2C] hover:bg-[#154E3A] text-xs h-8">Review</Button>
+                                    <Button size="sm" className="bg-[#0F3B2C] text-white hover:bg-[#154E3A] text-xs h-8">Review</Button>
                                 </TableCell>
                             </TableRow>
                         ))}

@@ -97,7 +97,7 @@ export default function UserManagementPage() {
                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
                         <Input className="pl-10 rounded-md bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 focus-visible:ring-[#0F3B2C] shadow-sm" placeholder="Search by name or email..." />
                     </div>
-                    <Button onClick={openAddModal} className="bg-[#0F3B2C] hover:bg-[#154E3A] rounded-md px-6 flex items-center gap-2">
+                    <Button onClick={openAddModal} className="bg-[#0F3B2C] text-white hover:bg-[#154E3A] rounded-md px-6 flex items-center gap-2">
                         <UserPlus size={16} /> Add New Admin
                     </Button>
                 </div>
@@ -185,7 +185,7 @@ export default function UserManagementPage() {
                             </div>
                             <div className="flex justify-end gap-3 mt-4">
                                 <Button type="button" variant="outline" onClick={() => setModalOpen(false)}>Cancel</Button>
-                                <Button type="submit" className="bg-[#0F3B2C] hover:bg-[#154E3A]">Save Admin</Button>
+                                <Button type="submit" className="bg-[#0F3B2C] text-white hover:bg-[#154E3A]">Save Admin</Button>
                             </div>
                         </form>
                     </div>

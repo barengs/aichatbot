@@ -110,7 +110,7 @@ export default function RoleManagementPage() {
                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
                         <Input className="pl-10 rounded-md bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 focus-visible:ring-[#0F3B2C] shadow-sm" placeholder="Search roles..." />
                     </div>
-                    <Button onClick={openAddModal} className="bg-[#0F3B2C] hover:bg-[#154E3A] rounded-md px-6 flex items-center gap-2">
+                    <Button onClick={openAddModal} className="bg-[#0F3B2C] text-white hover:bg-[#154E3A] rounded-md px-6 flex items-center gap-2">
                         <ShieldPlus size={16} /> Add New Role
                     </Button>
                 </div>
@@ -142,7 +142,7 @@ export default function RoleManagementPage() {
                                             </div>
                                         </TableCell>
                                         <TableCell className="text-gray-600 dark:text-gray-300">
-                                            <Badge className="bg-[#D1F4E0] text-[#0F3B2C] dark:text-[#A3E5C2] hover:bg-[#D1F4E0] shadow-none">
+                                            <Badge className="bg-[#D1F4E0] dark:bg-[#0c2f23] text-[#0F3B2C] dark:text-[#A3E5C2] hover:bg-[#D1F4E0] dark:hover:bg-[#0c2f23] shadow-none">
                                                 {role.permissions?.length || 0} Permissions
                                             </Badge>
                                         </TableCell>
@@ -240,7 +240,7 @@ export default function RoleManagementPage() {
                             
                             <div className="flex justify-end gap-3 mt-4">
                                 <Button type="button" variant="outline" onClick={() => setModalOpen(false)}>Batal</Button>
-                                <Button type="submit" className="bg-[#0F3B2C] hover:bg-[#154E3A]">Simpan Role</Button>
+                                <Button type="submit" className="bg-[#0F3B2C] text-white hover:bg-[#154E3A]">Simpan Role</Button>
                             </div>
                         </form>
                     </div>
