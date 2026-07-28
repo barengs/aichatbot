@@ -5,6 +5,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import ChatPage from './pages/ChatPage';
 import ChatHistoryPage from './pages/user/ChatHistoryPage';
 import ProfilePage from './pages/user/ProfilePage';
+import SettingsPage from './pages/user/SettingsPage';
 import AnalyticsPage from './pages/admin/AnalyticsPage';
 import UserManagementPage from './pages/admin/UserManagementPage';
 import RoleManagementPage from './pages/admin/RoleManagementPage';
@@ -32,6 +33,7 @@ export default function AppRoutes() {
                 <Route element={<ProtectedRoute />}>
                     <Route path="/history" element={<ChatHistoryPage />} />
                     <Route path="/profile" element={<ProfilePage />} />
+                    <Route path="/settings" element={<SettingsPage />} />
                 </Route>
 
                 {/* Admin Routes */}

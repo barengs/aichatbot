@@ -175,10 +175,10 @@ export default function DashboardLayout() {
                 <div className="p-4 border-t border-gray-200 dark:border-gray-700 space-y-2">
                     {user ? (
                         <>
-                            <button className={`flex items-center ${isCollapsed ? 'md:justify-center justify-start' : 'gap-3'} px-3 py-2 w-full text-left rounded-md text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700`} title="Pengaturan">
+                            <NavLink to="/settings" onClick={() => setIsMobileMenuOpen(false)} className={({ isActive }) => `flex items-center ${isCollapsed ? 'md:justify-center justify-start' : 'gap-3'} px-3 py-2 w-full text-left rounded-md text-sm font-medium ${isActive ? 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'}`} title="Pengaturan">
                                 <Settings size={18} className="shrink-0" />
                                 <span className={isCollapsed ? 'md:hidden block ml-3' : ''}>Pengaturan</span>
-                            </button>
+                            </NavLink>
                             <button onClick={handleLogout} className={`flex items-center ${isCollapsed ? 'md:justify-center justify-start' : 'gap-3'} px-3 py-2 w-full text-left rounded-md text-sm font-medium text-red-600 hover:bg-red-50`} title="Keluar">
                                 <LogOut size={18} className="shrink-0" />
                                 <span className={isCollapsed ? 'md:hidden block ml-3' : ''}>Keluar</span>
