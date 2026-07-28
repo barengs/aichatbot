@@ -159,20 +159,20 @@ export default function ChatPage() {
     return (
         <div className="flex flex-col h-full bg-[#F8FAFC] dark:bg-gray-900 relative">
             {sessionId && (
-                <div className="absolute top-4 right-6 md:right-10 z-20">
+                <div className="absolute top-4 left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-10 z-30 w-max">
                     <Button 
                         variant="outline" 
                         size="sm" 
                         onClick={() => navigate('/chat')}
-                        className="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-[#0F3B2C] dark:text-green-400 border-[#D1F4E0] dark:border-gray-600 shadow-sm rounded-full px-5 py-5 border-2"
+                        className="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-[#0F3B2C] dark:text-green-400 border-[#D1F4E0] dark:border-gray-600 shadow-md rounded-full px-5 py-2 border-2 flex items-center justify-center"
                     >
-                        <MessageSquarePlus size={18} className="md:mr-2" strokeWidth={2.5} /> <span className="hidden md:inline font-bold">Percakapan Baru</span>
+                        <MessageSquarePlus size={20} className="mr-2" strokeWidth={2.5} /> <span className="font-bold">Percakapan Baru</span>
                     </Button>
                 </div>
             )}
             
             {/* Main Chat Area */}
-            <div className="flex-1 overflow-y-auto p-4 md:p-8 flex flex-col items-center">
+            <div className="flex-1 overflow-y-auto p-4 pt-20 md:p-8 flex flex-col items-center">
                 {messages.length === 0 ? (
                     <>
                         <div className="w-16 h-16 bg-[#D1F4E0] dark:bg-green-900/30 text-[#0F3B2C] dark:text-green-400 rounded-2xl flex items-center justify-center mb-6 mt-10">
@@ -220,8 +220,8 @@ export default function ChatPage() {
                                         <span className="truncate max-w-[200px] font-medium">{msg.attachment_name}</span>
                                     </div>
                                 )}
-                                <div className={`max-w-[85%] p-4 rounded-2xl ${msg.role === 'user' ? 'bg-[#0F3B2C] text-white rounded-tr-sm' : 'bg-white border border-gray-200 text-gray-800 rounded-tl-sm shadow-sm'}`}>
-                                    <div className="prose prose-sm max-w-none prose-p:leading-relaxed prose-img:rounded-xl prose-img:shadow-md">
+                                <div className={`max-w-[85%] p-4 rounded-2xl ${msg.role === 'user' ? 'bg-[#0F3B2C] text-white rounded-tr-sm' : 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-100 rounded-tl-sm shadow-sm'}`}>
+                                    <div className="prose prose-sm max-w-none dark:prose-invert prose-p:leading-relaxed prose-img:rounded-xl prose-img:shadow-md">
                                         <ReactMarkdown>{msg.content.split('\n\n[Teks dari file')[0]}</ReactMarkdown>
                                     </div>
                                 </div>
@@ -249,9 +249,9 @@ export default function ChatPage() {
                         ))}
                         {loading && (
                             <div className="flex justify-start">
-                                <div className="bg-white border border-gray-200 p-4 rounded-2xl rounded-tl-sm shadow-sm flex items-center gap-2">
-                                    <Loader2 className="animate-spin text-[#0F3B2C]" size={20} />
-                                    <span className="text-gray-500 text-sm">AI sedang berpikir...</span>
+                                <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-4 rounded-2xl rounded-tl-sm shadow-sm flex items-center gap-2">
+                                    <Loader2 className="animate-spin text-[#0F3B2C] dark:text-green-400" size={20} />
+                                    <span className="text-gray-500 dark:text-gray-400 text-sm">AI sedang berpikir...</span>
                                 </div>
                             </div>
                         )}
