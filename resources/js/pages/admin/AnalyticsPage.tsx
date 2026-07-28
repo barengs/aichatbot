@@ -39,17 +39,17 @@ export default function AnalyticsPage() {
             const divalidasiPct = total > 0 ? Math.round((divalidasi / total) * 100) : 0;
 
             return (
-                <div className="bg-white p-3 rounded-lg shadow-lg border border-gray-100 text-sm">
-                    <p className="font-bold text-gray-900 mb-2">{label}</p>
+                <div className="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-lg border border-gray-100 dark:border-gray-700 text-sm">
+                    <p className="font-bold text-gray-900 dark:text-white mb-2">{label}</p>
                     <div className="flex items-center gap-2 mb-1">
                         <div className="w-2 h-2 rounded-full bg-[#0F3B2C]"></div>
-                        <span className="text-gray-600">Berhasil:</span>
-                        <span className="font-semibold text-gray-900">{berhasil} ({berhasilPct}%)</span>
+                        <span className="text-gray-600 dark:text-gray-300">Berhasil:</span>
+                        <span className="font-semibold text-gray-900 dark:text-white">{berhasil} ({berhasilPct}%)</span>
                     </div>
                     <div className="flex items-center gap-2">
                         <div className="w-2 h-2 rounded-full bg-[#A3E5C2]"></div>
-                        <span className="text-gray-600">Divalidasi:</span>
-                        <span className="font-semibold text-gray-900">{divalidasi} ({divalidasiPct}%)</span>
+                        <span className="text-gray-600 dark:text-gray-300">Divalidasi:</span>
+                        <span className="font-semibold text-gray-900 dark:text-white">{divalidasi} ({divalidasiPct}%)</span>
                     </div>
                 </div>
             );
@@ -58,14 +58,14 @@ export default function AnalyticsPage() {
     };
 
     return (
-        <div className="p-8 bg-[#F8FAFC] min-h-full">
+        <div className="p-8 bg-[#F8FAFC] dark:bg-gray-900 min-h-full">
             <div className="flex justify-between items-start mb-8">
                 <div>
-                    <h1 className="text-2xl font-bold text-gray-900 mb-1">Dashboard Analitik Guru</h1>
-                    <p className="text-sm text-gray-500">Pantau aktivitas pembelajaran dan kesehatan tanaman di ekosistem SMK.</p>
+                    <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">Dashboard Analitik Guru</h1>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">Pantau aktivitas pembelajaran dan kesehatan tanaman di ekosistem SMK.</p>
                 </div>
                 <div className="flex gap-3">
-                    <Button variant="outline" className="bg-white">
+                    <Button variant="outline" className="bg-white dark:bg-gray-800">
                         <CalendarIcon className="mr-2 h-4 w-4" />
                         Minggu Ini
                     </Button>
@@ -78,13 +78,13 @@ export default function AnalyticsPage() {
 
             {/* Top KPI Cards */}
             <div className="grid grid-cols-4 gap-4 mb-6">
-                <Card className="shadow-sm border-gray-200">
+                <Card className="shadow-sm border-gray-200 dark:border-gray-700">
                     <CardHeader className="pb-2">
-                        <CardTitle className="text-xs font-semibold text-gray-500">Total Chat Hari Ini</CardTitle>
+                        <CardTitle className="text-xs font-semibold text-gray-500 dark:text-gray-400">Total Chat Hari Ini</CardTitle>
                     </CardHeader>
                     <CardContent>
                         <div className="flex items-end gap-2 mb-2">
-                            <h3 className="text-3xl font-bold text-gray-900">{data.totalChatsToday}</h3>
+                            <h3 className="text-3xl font-bold text-gray-900 dark:text-white">{data.totalChatsToday}</h3>
                             <span className="flex items-center text-xs font-medium text-green-600 mb-1">
                                 <TrendingUp size={12} className="mr-1" /> {data.totalChatsToday > 0 ? '+12%' : '0%'}
                             </span>
@@ -95,17 +95,17 @@ export default function AnalyticsPage() {
                     </CardContent>
                 </Card>
 
-                <Card className="shadow-sm border-gray-200">
+                <Card className="shadow-sm border-gray-200 dark:border-gray-700">
                     <CardHeader className="pb-2">
-                        <CardTitle className="text-xs font-semibold text-gray-500">Topik Terpopuler</CardTitle>
+                        <CardTitle className="text-xs font-semibold text-gray-500 dark:text-gray-400">Topik Terpopuler</CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-3">
                         <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
-                                <Badge variant="secondary" className="bg-[#D1F4E0] text-[#0F3B2C]">Hama</Badge>
+                                <Badge variant="secondary" className="bg-[#D1F4E0] text-[#0F3B2C] dark:text-[#A3E5C2]">Hama</Badge>
                                 <span className="text-sm font-semibold">45%</span>
                             </div>
-                            <Bug size={16} className="text-[#0F3B2C]" />
+                            <Bug size={16} className="text-[#0F3B2C] dark:text-[#A3E5C2]" />
                         </div>
                         <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
@@ -117,37 +117,37 @@ export default function AnalyticsPage() {
                     </CardContent>
                 </Card>
 
-                <Card className="shadow-sm border-gray-200">
+                <Card className="shadow-sm border-gray-200 dark:border-gray-700">
                     <CardHeader className="pb-2">
-                        <CardTitle className="text-xs font-semibold text-gray-500">Penggunaan Token AI</CardTitle>
+                        <CardTitle className="text-xs font-semibold text-gray-500 dark:text-gray-400">Penggunaan Token AI</CardTitle>
                     </CardHeader>
                     <CardContent className="flex items-center gap-4">
                         <div className="w-12 h-12 rounded-lg bg-blue-50 flex items-center justify-center">
                             <Cpu size={24} className="text-blue-500" />
                         </div>
                         <div>
-                            <h4 className="font-bold text-gray-900">{data.totalTokensToday.toLocaleString('id-ID')}</h4>
+                            <h4 className="font-bold text-gray-900 dark:text-white">{data.totalTokensToday.toLocaleString('id-ID')}</h4>
                             <p className="text-xs text-blue-600 font-medium">Total: {data.totalTokensAllTime.toLocaleString('id-ID')}</p>
                         </div>
                     </CardContent>
                 </Card>
 
-                <Card className="shadow-sm border-gray-200">
+                <Card className="shadow-sm border-gray-200 dark:border-gray-700">
                     <CardHeader className="pb-2 flex flex-row items-start justify-between">
-                        <CardTitle className="text-xs font-semibold text-gray-500">Feedback Negatif</CardTitle>
+                        <CardTitle className="text-xs font-semibold text-gray-500 dark:text-gray-400">Feedback Negatif</CardTitle>
                         <div className="w-8 h-8 rounded-full bg-red-100 text-red-600 flex items-center justify-center">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"></path></svg>
                         </div>
                     </CardHeader>
                     <CardContent>
                         <h3 className="text-3xl font-bold text-red-600 mb-1">14</h3>
-                        <p className="text-xs text-gray-500">Butuh validasi guru segera.</p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400">Butuh validasi guru segera.</p>
                     </CardContent>
                 </Card>
             </div>
 
             <div className="grid grid-cols-3 gap-6 mb-8">
-                <Card className="col-span-2 shadow-sm border-gray-200">
+                <Card className="col-span-2 shadow-sm border-gray-200 dark:border-gray-700">
                     <CardHeader className="flex flex-row items-center justify-between pb-6">
                         <CardTitle className="text-lg font-bold">Aktivitas Chat Mingguan</CardTitle>
                         <div className="flex gap-4 text-xs">
@@ -168,50 +168,50 @@ export default function AnalyticsPage() {
                 </Card>
 
                 <div className="space-y-4">
-                    <h3 className="text-lg font-bold text-gray-900 mb-2">Alerts Perlu Perhatian</h3>
+                    <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Alerts Perlu Perhatian</h3>
                     
                     {data.alerts && data.alerts.length > 0 ? (
                         data.alerts.map((alert: any) => (
-                            <div key={alert.id} className={`bg-white p-4 rounded-xl border ${alert.type === 'negative' ? 'border-red-100' : 'border-green-100'} shadow-sm relative overflow-hidden`}>
+                            <div key={alert.id} className={`bg-white dark:bg-gray-800 p-4 rounded-xl border ${alert.type === 'negative' ? 'border-red-100' : 'border-green-100'} shadow-sm relative overflow-hidden`}>
                                 <div className={`absolute left-0 top-0 bottom-0 w-1 ${alert.type === 'negative' ? 'bg-red-500' : 'bg-[#0F3B2C]'}`}></div>
                                 <div className="flex gap-3">
                                     {alert.type === 'negative' ? (
                                         <AlertTriangle className="text-red-500 shrink-0" size={18} />
                                     ) : (
-                                        <Info className="text-[#0F3B2C] shrink-0" size={18} />
+                                        <Info className="text-[#0F3B2C] dark:text-[#A3E5C2] shrink-0" size={18} />
                                     )}
                                     <div>
-                                        <h4 className="text-sm font-bold text-gray-900">{alert.title}</h4>
-                                        <p className="text-xs text-gray-500 mt-1 mb-2 leading-relaxed">{alert.description}</p>
-                                        <button className={`text-xs font-bold ${alert.type === 'negative' ? 'text-red-600' : 'text-[#0F3B2C]'} hover:underline`}>Tinjau Sekarang</button>
+                                        <h4 className="text-sm font-bold text-gray-900 dark:text-white">{alert.title}</h4>
+                                        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 mb-2 leading-relaxed">{alert.description}</p>
+                                        <button className={`text-xs font-bold ${alert.type === 'negative' ? 'text-red-600' : 'text-[#0F3B2C] dark:text-[#A3E5C2]'} hover:underline`}>Tinjau Sekarang</button>
                                     </div>
                                 </div>
                             </div>
                         ))
                     ) : (
-                        <div className="text-sm text-gray-500 p-4 bg-gray-50 rounded-xl border border-gray-100 text-center">
+                        <div className="text-sm text-gray-500 dark:text-gray-400 p-4 bg-gray-50 dark:bg-gray-900/50 rounded-xl border border-gray-100 dark:border-gray-700 text-center">
                             Tidak ada alert baru hari ini.
                         </div>
                     )}
                 </div>
             </div>
 
-            <Card className="shadow-sm border-gray-200 overflow-hidden">
-                <div className="p-4 border-b border-gray-200 flex items-center justify-between bg-white">
-                    <h3 className="text-lg font-bold text-gray-900">Monitoring Obrolan</h3>
+            <Card className="shadow-sm border-gray-200 dark:border-gray-700 overflow-hidden">
+                <div className="p-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between bg-white dark:bg-gray-800">
+                    <h3 className="text-lg font-bold text-gray-900 dark:text-white">Monitoring Obrolan</h3>
                     <div className="relative w-72">
                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={16} />
-                        <Input className="pl-9 h-9 rounded-full bg-gray-50 border-gray-200 text-sm" placeholder="Cari pertanyaan siswa..." />
+                        <Input className="pl-9 h-9 rounded-full bg-gray-50 dark:bg-gray-900/50 border-gray-200 dark:border-gray-700 text-sm" placeholder="Cari pertanyaan siswa..." />
                     </div>
                 </div>
                 
                 <Table>
-                    <TableHeader className="bg-gray-50">
+                    <TableHeader className="bg-gray-50 dark:bg-gray-900/50">
                         <TableRow>
-                            <TableHead className="font-semibold text-gray-600 w-[25%]">Siswa</TableHead>
-                            <TableHead className="font-semibold text-gray-600">Pertanyaan Terakhir</TableHead>
-                            <TableHead className="font-semibold text-gray-600 w-[15%]">Status AI</TableHead>
-                            <TableHead className="font-semibold text-gray-600 text-right w-[15%]">Aksi</TableHead>
+                            <TableHead className="font-semibold text-gray-600 dark:text-gray-300 w-[25%]">Siswa</TableHead>
+                            <TableHead className="font-semibold text-gray-600 dark:text-gray-300">Pertanyaan Terakhir</TableHead>
+                            <TableHead className="font-semibold text-gray-600 dark:text-gray-300 w-[15%]">Status AI</TableHead>
+                            <TableHead className="font-semibold text-gray-600 dark:text-gray-300 text-right w-[15%]">Aksi</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -219,14 +219,14 @@ export default function AnalyticsPage() {
                             <TableRow key={chat.id}>
                                 <TableCell className="font-medium">
                                     <div className="flex items-center gap-3">
-                                        <div className="w-8 h-8 rounded-full bg-[#D1F4E0] text-[#0F3B2C] flex items-center justify-center text-xs font-bold">{chat.user_initials}</div>
+                                        <div className="w-8 h-8 rounded-full bg-[#D1F4E0] text-[#0F3B2C] dark:text-[#A3E5C2] flex items-center justify-center text-xs font-bold">{chat.user_initials}</div>
                                         <div>
-                                            <p className="text-sm text-gray-900">{chat.user_name}</p>
-                                            <p className="text-xs text-gray-500 font-normal">{chat.user_school}</p>
+                                            <p className="text-sm text-gray-900 dark:text-white">{chat.user_name}</p>
+                                            <p className="text-xs text-gray-500 dark:text-gray-400 font-normal">{chat.user_school}</p>
                                         </div>
                                     </div>
                                 </TableCell>
-                                <TableCell className="text-gray-600 text-sm truncate max-w-xs">"{chat.last_message}"</TableCell>
+                                <TableCell className="text-gray-600 dark:text-gray-300 text-sm truncate max-w-xs">"{chat.last_message}"</TableCell>
                                 <TableCell><Badge variant="outline" className="bg-green-50 text-green-700 border-green-200 font-medium">{chat.status}</Badge></TableCell>
                                 <TableCell className="text-right">
                                     <Button size="sm" className="bg-[#0F3B2C] hover:bg-[#154E3A] text-xs h-8">Review</Button>

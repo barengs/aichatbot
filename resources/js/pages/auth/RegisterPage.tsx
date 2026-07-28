@@ -1,3 +1,4 @@
+import { Loader2 } from "lucide-react";
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -105,9 +106,9 @@ export default function RegisterPage() {
                     <button
                         type="submit"
                         disabled={loading}
-                        className="w-full bg-[#0F3B2C] text-white py-2 rounded-md hover:bg-[#0c2f23] transition-colors disabled:opacity-50"
+                        className="w-full bg-[#0F3B2C] text-white py-2 rounded-md hover:bg-[#0c2f23] transition-colors disabled:cursor-not-allowed flex items-center justify-center gap-2"
                     >
-                        {loading ? 'Registering...' : 'Register'}
+                        {loading ? <><Loader2 size={18} className="animate-spin" /> Registering...</> : 'Register'}
                     </button>
                 </form>
 

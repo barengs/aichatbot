@@ -294,7 +294,7 @@ export default function ChatPage() {
                             onChange={handleFileChange}
                         />
                         <button
-                            className="p-3 text-gray-400 hover:text-[#0F3B2C] dark:hover:text-green-400 transition-colors disabled:opacity-50"
+                            className="p-3 text-gray-400 hover:text-[#0F3B2C] dark:hover:text-green-400 transition-colors disabled:cursor-not-allowed"
                             onClick={() => fileInputRef.current?.click()}
                             disabled={loading}
                         >
@@ -318,9 +318,9 @@ export default function ChatPage() {
                         <button 
                             onClick={handleSend}
                             disabled={loading || (!input.trim() && !selectedFile)}
-                            className="p-3 bg-[#0F3B2C] text-white rounded-full hover:bg-[#154E3A] transition-colors ml-2 disabled:opacity-50"
+                            className="p-3 bg-[#0F3B2C] text-white rounded-full hover:bg-[#154E3A] transition-colors ml-2 disabled:cursor-not-allowed"
                         >
-                            <Send size={18} />
+                            {loading ? <Loader2 size={18} className="animate-spin" /> : <Send size={18} />}
                         </button>
                     </div>
                     <p className="text-center text-xs text-gray-400 mt-3">

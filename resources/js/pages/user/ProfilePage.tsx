@@ -61,8 +61,8 @@ export default function ProfilePage() {
                         <button onClick={() => setIsEditing(false)} className="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 rounded-lg text-sm font-medium hover:bg-gray-300 dark:hover:bg-gray-600">
                             Batal
                         </button>
-                        <button onClick={handleSave} disabled={loading} className="px-4 py-2 bg-[#0F3B2C] dark:bg-green-700 text-white rounded-lg text-sm font-medium hover:bg-[#154E3A] dark:hover:bg-green-600 disabled:opacity-50">
-                            {loading ? 'Menyimpan...' : 'Simpan'}
+                        <button onClick={handleSave} disabled={loading} className="px-4 py-2 bg-[#0F3B2C] dark:bg-green-700 text-white rounded-lg text-sm font-medium hover:bg-[#154E3A] dark:hover:bg-green-600 disabled:cursor-not-allowed flex items-center justify-center gap-2">
+                            {loading ? <><Loader2 size={16} className="animate-spin" /> Menyimpan...</> : 'Simpan'}
                         </button>
                     </div>
                 )}

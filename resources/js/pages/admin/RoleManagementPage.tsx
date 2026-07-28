@@ -95,12 +95,12 @@ export default function RoleManagementPage() {
     const paginatedRoles = roles.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
     return (
-        <div className="flex flex-col h-full bg-[#F8FAFC]">
+        <div className="flex flex-col h-full bg-[#F8FAFC] dark:bg-gray-900">
             <div className="p-8 pb-4">
                 <div className="mb-2">
-                    <p className="text-xs text-gray-500 font-medium mb-1">Admin / <span className="text-gray-900 font-bold">Role Management</span></p>
-                    <h1 className="text-3xl font-bold text-[#0F3B2C]">Roles & Permissions</h1>
-                    <p className="text-sm text-gray-500 mt-1">Configure staff roles and their CRUD access levels.</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400 font-medium mb-1">Admin / <span className="text-gray-900 dark:text-white font-bold">Role Management</span></p>
+                    <h1 className="text-3xl font-bold text-[#0F3B2C] dark:text-[#A3E5C2]">Roles & Permissions</h1>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Configure staff roles and their CRUD access levels.</p>
                 </div>
             </div>
             
@@ -108,46 +108,46 @@ export default function RoleManagementPage() {
                 <div className="flex justify-between items-center mb-6">
                     <div className="relative w-96">
                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
-                        <Input className="pl-10 rounded-md bg-white border-gray-200 focus-visible:ring-[#0F3B2C] shadow-sm" placeholder="Search roles..." />
+                        <Input className="pl-10 rounded-md bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 focus-visible:ring-[#0F3B2C] shadow-sm" placeholder="Search roles..." />
                     </div>
                     <Button onClick={openAddModal} className="bg-[#0F3B2C] hover:bg-[#154E3A] rounded-md px-6 flex items-center gap-2">
                         <ShieldPlus size={16} /> Add New Role
                     </Button>
                 </div>
 
-                <div className="bg-white border border-gray-200 shadow-sm overflow-hidden mb-4">
+                <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm overflow-hidden mb-4">
                     <Table>
-                        <TableHeader className="bg-gray-50">
+                        <TableHeader className="bg-gray-50 dark:bg-gray-900/50">
                             <TableRow>
-                                <TableHead className="font-semibold text-gray-600">Role Name</TableHead>
-                                <TableHead className="font-semibold text-gray-600">Permissions Count</TableHead>
-                                <TableHead className="font-semibold text-gray-600 text-center">Actions</TableHead>
+                                <TableHead className="font-semibold text-gray-600 dark:text-gray-300">Role Name</TableHead>
+                                <TableHead className="font-semibold text-gray-600 dark:text-gray-300">Permissions Count</TableHead>
+                                <TableHead className="font-semibold text-gray-600 dark:text-gray-300 text-center">Actions</TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
                             {loading ? (
                                 <TableRow>
-                                    <TableCell colSpan={3} className="text-center py-8 text-gray-500">Loading roles...</TableCell>
+                                    <TableCell colSpan={3} className="text-center py-8 text-gray-500 dark:text-gray-400">Loading roles...</TableCell>
                                 </TableRow>
                             ) : paginatedRoles.length === 0 ? (
                                 <TableRow>
-                                    <TableCell colSpan={3} className="text-center py-8 text-gray-500">No roles found.</TableCell>
+                                    <TableCell colSpan={3} className="text-center py-8 text-gray-500 dark:text-gray-400">No roles found.</TableCell>
                                 </TableRow>
                             ) : (
                                 paginatedRoles.map(role => (
                                     <TableRow key={role.id} className="group">
                                         <TableCell className="font-medium">
                                             <div className="flex items-center gap-3">
-                                                <span className="text-gray-900 font-bold uppercase">{role.name}</span>
+                                                <span className="text-gray-900 dark:text-white font-bold uppercase">{role.name}</span>
                                             </div>
                                         </TableCell>
-                                        <TableCell className="text-gray-600">
-                                            <Badge className="bg-[#D1F4E0] text-[#0F3B2C] hover:bg-[#D1F4E0] shadow-none">
+                                        <TableCell className="text-gray-600 dark:text-gray-300">
+                                            <Badge className="bg-[#D1F4E0] text-[#0F3B2C] dark:text-[#A3E5C2] hover:bg-[#D1F4E0] shadow-none">
                                                 {role.permissions?.length || 0} Permissions
                                             </Badge>
                                         </TableCell>
                                         <TableCell className="text-center space-x-1">
-                                            <Button onClick={() => openEditModal(role)} variant="ghost" size="icon" className="text-gray-400 hover:text-gray-700 h-8 w-8" title="Detail & Edit"><Edit2 size={16} /></Button>
+                                            <Button onClick={() => openEditModal(role)} variant="ghost" size="icon" className="text-gray-400 hover:text-gray-700 dark:text-gray-300 h-8 w-8" title="Detail & Edit"><Edit2 size={16} /></Button>
                                             {role.name !== 'admin' ? (
                                                 <Button onClick={() => handleDelete(role.id, role.name)} variant="ghost" size="icon" className="text-gray-400 hover:text-red-600 h-8 w-8" title="Hapus"><Trash2 size={16} /></Button>
                                             ) : (
@@ -163,7 +163,7 @@ export default function RoleManagementPage() {
                 
                 {!loading && roles.length > 0 && (
                     <div className="flex items-center justify-between">
-                        <p className="text-sm text-gray-500">Showing {(currentPage - 1) * itemsPerPage + 1} to {Math.min(currentPage * itemsPerPage, roles.length)} of {roles.length} roles</p>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">Showing {(currentPage - 1) * itemsPerPage + 1} to {Math.min(currentPage * itemsPerPage, roles.length)} of {roles.length} roles</p>
                         <div className="flex items-center gap-2">
                             <Button 
                                 variant="outline" 
@@ -188,35 +188,35 @@ export default function RoleManagementPage() {
 
             {modalOpen && (
                 <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-                    <div className="bg-white rounded-xl shadow-xl w-full max-w-2xl overflow-hidden">
-                        <div className="p-4 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
-                            <h3 className="font-bold text-gray-900">{editingRole ? 'Edit Role' : 'Add New Role'}</h3>
-                            <button onClick={() => setModalOpen(false)} className="text-gray-400 hover:text-gray-600">
+                    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl w-full max-w-2xl overflow-hidden">
+                        <div className="p-4 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center bg-gray-50 dark:bg-gray-900/50">
+                            <h3 className="font-bold text-gray-900 dark:text-white">{editingRole ? 'Edit Role' : 'Add New Role'}</h3>
+                            <button onClick={() => setModalOpen(false)} className="text-gray-400 hover:text-gray-600 dark:text-gray-300">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
                             </button>
                         </div>
                         <form onSubmit={handleSubmit} className="p-5 flex flex-col gap-4">
                             <div>
-                                <label className="block text-xs font-medium text-gray-700 mb-1">Role Name (e.g. editor, author)</label>
+                                <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Role Name (e.g. editor, author)</label>
                                 <Input required value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value.toLowerCase()})} placeholder="role_name" disabled={!!editingRole} />
                             </div>
                             
                             <div className="mt-2">
-                                <label className="block text-xs font-medium text-gray-700 mb-2">CRUD Permissions Matrix</label>
-                                <div className="border border-gray-200 rounded-lg overflow-hidden">
+                                <label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-2">CRUD Permissions Matrix</label>
+                                <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
                                     <table className="w-full text-sm text-left">
-                                        <thead className="bg-gray-50 border-b border-gray-200">
+                                        <thead className="bg-gray-50 dark:bg-gray-900/50 border-b border-gray-200 dark:border-gray-700">
                                             <tr>
-                                                <th className="px-4 py-2 font-semibold text-gray-600">Menu</th>
+                                                <th className="px-4 py-2 font-semibold text-gray-600 dark:text-gray-300">Menu</th>
                                                 {ACTIONS.map(a => (
-                                                    <th key={a} className="px-4 py-2 text-center font-semibold text-gray-600 capitalize">{a}</th>
+                                                    <th key={a} className="px-4 py-2 text-center font-semibold text-gray-600 dark:text-gray-300 capitalize">{a}</th>
                                                 ))}
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {MENUS.map(menu => (
-                                                <tr key={menu.id} className="border-b border-gray-100 last:border-b-0 hover:bg-gray-50/50 transition-colors">
-                                                    <td className="px-4 py-3 font-medium text-gray-700">{menu.label}</td>
+                                                <tr key={menu.id} className="border-b border-gray-100 dark:border-gray-700 last:border-b-0 hover:bg-gray-50 dark:bg-gray-900/50 transition-colors">
+                                                    <td className="px-4 py-3 font-medium text-gray-700 dark:text-gray-300">{menu.label}</td>
                                                     {ACTIONS.map(action => {
                                                         const permName = `${action}_${menu.id}`;
                                                         const isActive = formData.permissions.includes(permName);
@@ -224,7 +224,7 @@ export default function RoleManagementPage() {
                                                             <td key={action} className="px-4 py-3 text-center">
                                                                 <input 
                                                                     type="checkbox" 
-                                                                    className="w-4 h-4 text-[#0F3B2C] border-gray-300 rounded focus:ring-[#0F3B2C] cursor-pointer"
+                                                                    className="w-4 h-4 text-[#0F3B2C] dark:text-[#A3E5C2] border-gray-300 rounded focus:ring-[#0F3B2C] cursor-pointer"
                                                                     checked={isActive}
                                                                     onChange={() => togglePermission(permName)}
                                                                 />
