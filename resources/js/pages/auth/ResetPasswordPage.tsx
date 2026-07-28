@@ -3,10 +3,12 @@ import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import api from '../../lib/axios';
 
 export default function ResetPasswordPage() {
-    const { token } = useParams<{ token: string }>();
+    const searchParams = new URLSearchParams(useLocation().search);
+    const token = searchParams.get("token") || "";
+    const emailFromUrl = searchParams.get("email") || "";
     const location = useLocation();
     
-    const [email, setEmail] = useState('');
+    const [email, setEmail] = useState(emailFromUrl);
     const [password, setPassword] = useState('');
     const [passwordConfirmation, setPasswordConfirmation] = useState('');
     const [message, setMessage] = useState('');
